@@ -4,20 +4,19 @@ import LoginForm from '../components/login/LoginForm';
 class Homepage extends Component {
 
   render() {
-    const inputs = [
-      {
-        name: "Username",
-        type: "text"
-      },
-      {
-        name: "Password",
-        type: "password"
-      }
-    ];
+    const inputs = [{
+      name: "Username",
+      type: "text"
+    },
+    {
+      name: "Password",
+      type: "password"
+    }];
 
     return (
-      <header className="App">
-        <LoginForm title="HowlPlay Login" button="Login" input={inputs}/>
+      <header className="page" id="login">
+        <h1>HowlPlay Admin</h1>
+        <LoginForm title="Login" button="Login" input={inputs}/>
       </header>
     );
   }

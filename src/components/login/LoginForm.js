@@ -4,11 +4,11 @@ class LoginForm extends Component {
   render() {
     return (
       <form id="login-form">
-        <h1>{this.props.title}</h1>
+        <h3>{this.props.title}</h3>
 
         {this.props.input.map(function(item, key) {
           return (
-            <div className="login-input-section">
+            <div className="login-input-section" key={key}>
               <label className="login-form-label" htmlFor="{item.name}-input">{item.name}: </label>
               <input type="{item.type}" className="login-input" id="{item.name}-input"/>
             </div>

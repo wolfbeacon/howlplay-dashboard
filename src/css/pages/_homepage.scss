@@ -5,3 +5,16 @@ html {
   background-color: #222222;
   color: #ffffff;
 }
+
+#login {
+  grid-template:  "h h h" ". l ." "f f f";
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr auto 2fr;
+}
+
+.page {
+  align-items: center;
+  justify-content: center;
+}
+
+@import "../components/LoginForm";
