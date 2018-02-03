@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import logo from '../logo.svg';
+import DashboardNavbar from "../components/dashboard/DashboardNavbar";
 
 class Homepage extends Component {
   render() {
@@ -12,6 +13,7 @@ class Homepage extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
+          <DashboardNavbar/>
       </div>
     );
   }

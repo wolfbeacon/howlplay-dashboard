@@ -11,10 +11,17 @@ import NotFound from "./pages/404"
 import Homepage from './pages/Homepage';
 import './css/main.scss';
 
+import {DashboardNavbarReducer} from "./redux/reducers/DashboardReducers";
+import {GroupReducer, QuizReducer} from "./redux/reducers/QuizReducers";
+import Dashboard from "./pages/Dashboard";
+
 // we'll worry about redux later I just set this up so that way I can set up the redux router
 const store = createStore(
     combineReducers({
-        routing: routerReducer
+        routing: routerReducer,
+        dashboardNavbar: DashboardNavbarReducer,
+        quizGroups: GroupReducer,
+        quizzes: QuizReducer
     })
 );
 
@@ -26,6 +33,7 @@ ReactDOM.render(
         <Router history={history}>
             <Switch>
                 <Route exact path="/" component={Homepage}/>
+                <Route path="/dashboard" component={Dashboard}/>
                 <Route component={NotFound}/> {/*404 Route*/}
             </Switch>
         </Router>
