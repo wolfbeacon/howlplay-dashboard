@@ -5,10 +5,9 @@ export function groupHeaderClicked(id) {
     }
 }
 
-export function quizClicked(groupID, quizID) {
+export function quizClicked(quizID) {
     return {
         type: 'QUIZ_CLICKED',
         quizID: quizID,
-        groupID: groupID
     }
 }

@@ -27,14 +27,15 @@ export const GroupReducer = (state=group_default_state, action) => {
 };
 
 const quiz_default_state = {
-    activeQuiz: "q123",
+    activeQuiz: null,
     quizzes: {
         "q123": {
             name: "TestQuiz1",
             group: "abc"
         },
         "qabc": {
-            name: "TestQuiz2"
+            name: "TestQuiz2",
+            group: "123"
         }
     }
 };
@@ -43,7 +44,7 @@ export const QuizReducer = (state=quiz_default_state, action) => {
     let newState = cloneDeep(state);
     switch (action.type) {
         case "QUIZ_CLICKED":
-            newState.activeQuiz = action.quizID;
+            newState.activeQuiz = newState.quizzes[action.quizID];
             break;
         default:
             break;

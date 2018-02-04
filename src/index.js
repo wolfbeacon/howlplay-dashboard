@@ -21,7 +21,7 @@ const store = createStore(
         routing: routerReducer,
         dashboardNavbar: DashboardNavbarReducer,
         quizGroups: GroupReducer,
-        quizzes: QuizReducer
+        quiz: QuizReducer
     })
 );
 

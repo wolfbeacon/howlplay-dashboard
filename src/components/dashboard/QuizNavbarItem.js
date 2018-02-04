@@ -10,7 +10,7 @@ const QuizNavbarItem = ({name, clicked}) =>
 
 
 const mapStateToProps = (state, ownProps) => ({
-    name: state.quizzes.quizzes[ownProps.id].name,
+    name: state.quiz.quizzes[ownProps.id].name,
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
