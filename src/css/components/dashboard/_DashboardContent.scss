@@ -1,0 +1,29 @@
+#dashboard-content {
+  padding: 20px;
+}
+
+#dashboard-content-header {
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+#dashboard-content-controls {
+  margin-top: 4px;
+  margin-left: auto;
+}
+
+.quiz-name-edit-label {
+  font-size: 2em;
+}
+
+.group-name-edit-label {
+  font-size: 1.4em;
+}
+
+.group-editable {
+  margin-top: 20px;
+}
+
+#start-quiz-button {
+  margin-right: 10px;
+}

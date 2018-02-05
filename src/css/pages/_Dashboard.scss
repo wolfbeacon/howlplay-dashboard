@@ -12,7 +12,10 @@
 
 #dashboard-header {
   grid-area: h;
-  background-color: $light-gray;
+  background-color: $dark-gray;
+  @include tablet {
+    background-color: $light-gray;
+  }
 }
 
 #dashboard-navbar {
@@ -22,8 +25,8 @@
 
 #dashboard-content {
   grid-area: c;
-  background-color: aqua;
 }
 
 @import "../components/dashboard/DashboardNavbar";
 @import "../components/dashboard/DashboardHeader";
+@import "../components/dashboard/DashboardContent";

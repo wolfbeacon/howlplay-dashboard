@@ -1,7 +1,22 @@
 #dashboard-header {
   color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 #dashboard-title {
   margin: 12px;
+  font-size: 1.5em;
+}
+
+#dashboard-header-dropdown-button {
+  margin: 0 10px 0 auto;
+  background-size: contain;
+  border: none;
+  width: 20px;
+  height: 20px;
+  @include tablet {
+    display: none;
+  }
 }

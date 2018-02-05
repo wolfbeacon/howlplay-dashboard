@@ -3,27 +3,17 @@
   flex-direction: column;
   align-items: flex-start;
   color: white;
-  position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
-  padding: 20px;
+  padding: 5px;
   box-sizing: border-box;
 
   @include tablet {
     position: relative;
-  }
-}
-
-#dashboard-navbar-dropdown-button {
-  align-self: flex-end;
-  @include tablet {
-    display: none;
+    padding: 20px;
   }
 }
 
 #dashboard-navbar-items {
-  margin-top: 20px;
   width: 100%;
   display: flex;
   flex-direction: column;

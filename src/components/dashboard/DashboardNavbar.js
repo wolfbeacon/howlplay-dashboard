@@ -2,10 +2,10 @@ import React from "react";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import GroupNavbarItem from "./GroupNavbarItem";
+import {toggleNavbar} from "../../redux/actions/DashboardActions";
 
-const DashboardNavbar = ({groups, expanded}) =>
-<div id={"dashboard-navbar"} style={(expanded) ? {height: "100%"} : null}>
-    <button id={"dashboard-navbar-dropdown-button"} style={{backgroundImage: (expanded) ? null : null}}/>
+const DashboardNavbar = ({groups, expanded, toggleNavbar}) =>
+<div id={"dashboard-navbar"} style={{display:`${(expanded) ? "flex" : "none"}`}} >
     <div id={"dashboard-navbar-items"}  style={{display: (expanded) ? "flex" : "none"}}>
         {groups.map(groupID => <GroupNavbarItem id={groupID} key={groupID}/>)}
     </div>
@@ -17,7 +17,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-
+    toggleNavbar: () => toggleNavbar(false)
 }, dispatch);
 
 

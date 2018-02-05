@@ -1,11 +1,11 @@
 import React from "react";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
+import DashboardContentHeader from "./DashboardContentHeader";
 
-const DashboardContent = ({quizName, groupName}) =>
+const DashboardContent = () =>
     <div id={"dashboard-content"}>
-        <h1>{quizName}</h1>
-        <h2>{groupName}</h2>
+        <DashboardContentHeader/>
     </div>;
 
 const mapStateToProps = (state) => {

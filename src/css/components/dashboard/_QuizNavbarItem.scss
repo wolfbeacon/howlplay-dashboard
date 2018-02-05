@@ -1,10 +1,12 @@
 .quiz-navbar-item {
   margin-top: 7px;
-  margin-left: 30px;
+  margin-left: 32px;
   width: 100%;
   cursor: pointer;
 }
 
-.quiz-navbar-name:hover {
-  color: aqua;
+@include tablet {
+  .quiz-navbar-name:hover {
+    color: aqua;
+  }
 }

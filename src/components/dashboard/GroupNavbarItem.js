@@ -12,7 +12,7 @@ const GroupNavbarItem = ({name, quizzes, expanded, headerClick, id}) =>
     <div className={"group-navbar-item"}>
         <div className={"group-navbar-header"} onClick={headerClick}>
             <div className={"group-navbar-icon folder-icon"} style={{backgroundImage: `url(${FolderIcon})`}}/>
-            <h3>{name}</h3>
+            <h3 className={"group-navbar-title"}>{name}</h3>
             <div className={"group-navbar-icon group-dropdown-icon"} style={{backgroundImage: (expanded) ? `url(${CollapsedIcon})` : `url(${ExpandedIcon})`}}/>
         </div>
         <div style={{display: (expanded) ? "flex" : "none"}}>
