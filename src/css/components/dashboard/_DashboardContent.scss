@@ -43,14 +43,17 @@
   background-color: $primary;
 }
 
-#start-quiz-button:hover {
-  background-color: $primary-dark;
-}
 
 #delete-quiz-button {
   background-color: $red;
 }
 
-#delete-quiz-button:hover {
-  background-color: $red-dark;
+@include tablet {
+  #start-quiz-button:hover {
+    background-color: $primary-dark;
+  }
+
+  #delete-quiz-button:hover {
+    background-color: $red-dark;
+  }
 }
