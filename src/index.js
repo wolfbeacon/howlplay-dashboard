@@ -9,6 +9,7 @@ import {routerReducer} from 'react-router-redux';
 
 import NotFound from "./pages/404"
 import Homepage from './pages/Homepage';
+import GamePage from './pages/gamepage'
 import './css/main.scss';
 
 // we'll worry about redux later I just set this up so that way I can set up the redux router
@@ -26,6 +27,7 @@ ReactDOM.render(
         <Router history={history}>
             <Switch>
                 <Route exact path="/" component={Homepage}/>
+                <Route exact path="/gamepage" component={GamePage}/>
                 <Route component={NotFound}/> {/*404 Route*/}
             </Switch>
         </Router>
