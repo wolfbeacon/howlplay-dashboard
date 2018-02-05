@@ -7,8 +7,9 @@ import createHistory from 'history/createBrowserHistory';
 import {Router, Route, Switch} from 'react-router';
 import {routerReducer} from 'react-router-redux';
 
+import Login from "./pages/Login";
 import NotFound from "./pages/404"
-import Homepage from './pages/Homepage';
+
 import './css/main.scss';
 
 import {DashboardNavbarReducer} from "./redux/reducers/DashboardReducers";
@@ -32,7 +33,7 @@ ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
             <Switch>
-                <Route exact path="/" component={Homepage}/>
+                <Route exact path="/" component={Login}/>
                 <Route path="/dashboard" component={Dashboard}/>
                 <Route component={NotFound}/> {/*404 Route*/}
             </Switch>
