@@ -13,9 +13,7 @@
 #dashboard-header {
   grid-area: h;
   background-color: $dark-gray;
-  @include tablet {
-    background-color: $light-gray;
-  }
+
 }
 
 #dashboard-navbar {

@@ -11,8 +11,8 @@ const DashboardContentHeader = ({quizName, groupName}) =>
             <EditableLabel text={groupName} className={"group-editable"} labelClassName={"edit-label group-name-edit-label"} editIcon={EditIcon}/>
         </div>
         <div id="dashboard-content-controls">
-            <button id={"start-quiz-button"}>Start</button>
-            <button id={"delete-quiz-button"}>Delete</button>
+            <button className={"quiz-button"} id={"start-quiz-button"}>Start</button>
+            <button className={"quiz-button"} id={"delete-quiz-button"}>Delete</button>
         </div>
     </div>;
 

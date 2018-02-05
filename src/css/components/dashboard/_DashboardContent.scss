@@ -24,6 +24,21 @@
   margin-top: 20px;
 }
 
+.quiz-button {
+  border: none;
+  font-size: 1em;
+  width: 60px;
+  padding: 5px;
+  cursor: pointer;
+}
+
 #start-quiz-button {
   margin-right: 10px;
+  background-color: $primary;
+  color: white;
+}
+
+#delete-quiz-button {
+  background-color: $red;
+  color: white;
 }

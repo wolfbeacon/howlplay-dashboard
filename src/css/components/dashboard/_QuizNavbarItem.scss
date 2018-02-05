@@ -1,5 +1,5 @@
 .quiz-navbar-item {
-  margin-top: 7px;
+  margin-top: 12px;
   margin-left: 32px;
   width: 100%;
   cursor: pointer;
@@ -7,6 +7,6 @@
 
 @include tablet {
   .quiz-navbar-name:hover {
-    color: aqua;
+    color: $primary;
   }
 }

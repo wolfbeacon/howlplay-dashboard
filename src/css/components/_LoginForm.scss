@@ -17,10 +17,6 @@
   margin-top: 20px;
 }
 
-#login-heading {
-  margin-bottom: -5px;
-}
-
 #login-subheading {
   margin-bottom: 10px;
 }
@@ -78,9 +74,6 @@
   outline: none;
 }
 
-#login-heading-accent {
-  color: $primary;
-}
 
 @keyframes fade-in {
   from {opacity: 0; top: -140px;}
