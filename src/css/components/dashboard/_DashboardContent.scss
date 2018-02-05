@@ -26,19 +26,31 @@
 
 .quiz-button {
   border: none;
-  font-size: 1em;
+  font-size: 0.75em;
   width: 60px;
-  padding: 5px;
+  padding: 10px 0;
   cursor: pointer;
+  transition: background 0.2s ease-in-out 0s;
+  color: white;
+}
+
+.quiz-button:focus {
+  outline: none;
 }
 
 #start-quiz-button {
   margin-right: 10px;
   background-color: $primary;
-  color: white;
+}
+
+#start-quiz-button:hover {
+  background-color: $primary-dark;
 }
 
 #delete-quiz-button {
   background-color: $red;
-  color: white;
+}
+
+#delete-quiz-button:hover {
+  background-color: $red-dark;
 }
