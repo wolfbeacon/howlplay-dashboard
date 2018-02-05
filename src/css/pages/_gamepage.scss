@@ -2,9 +2,16 @@
   display: grid;
   grid-template-columns: 20% 30px auto 30px 20%;
   // grid-template-rows: 300px auto 300px;
-   grid-template-rows: 25% auto 25%;
+   grid-template-rows: 35% auto 35%;
    width : 100vw;
    height: 100vh;
+}
+
+#questions-left {
+  font-size: 40px;
+  grid-row-start: 3;
+  grid-column-start: 3;
+  justify-self: center;
 }
 
 @import '../components/gamepage/question'

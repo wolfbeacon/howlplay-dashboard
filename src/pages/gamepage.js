@@ -6,6 +6,7 @@ class GamePage extends Component {
     return (
       <div id="gamepage">
         <Question />
+        <div id="questions-left">5 questions left</div>
       </div>
     );
   }

@@ -5,7 +5,7 @@ class Question extends Component {
   render() {
     return(
       <div className="question-area">
-        <div className="question-text">Should Computer scientists be able to speak using stale internet memes?
+        <div className="question-text">Should Computer scientists be able to communicate via stale internet memes?
           <QuestionAnswer text="Yes" />
           <QuestionAnswer text="No" />
           <QuestionAnswer text="I don't know" />

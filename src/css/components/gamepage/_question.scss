@@ -1,7 +1,7 @@
 .question-area {
   display: grid;
   grid-template-columns: 20% 30px auto 30px 20%;
-  grid-template-rows: 30px auto 30px;
+  grid-template-rows: auto;
   grid-row-start: 2;
   grid-column-start: 2;
   grid-column-end: span 2;
@@ -11,6 +11,7 @@
   grid-column: 1 / -1;
   grid-row-start: 1;
   justify-self: center;
+  font-size: 25px;
 
 }
 
