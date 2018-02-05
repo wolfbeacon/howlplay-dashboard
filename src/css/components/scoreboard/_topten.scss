@@ -1,8 +1,12 @@
 .toptenboard {
-  font-size: 50px;
+  grid-column-start: 1;
+  grid-column-end: span 3;
+  grid-row-start: 1;
+  grid-row-end: span 2;
 }
 
-.rows {
-  display: grid;
-  grid-template-columns: auto;
+.active-users {
+  grid-row-start: 3;
+  grid-row-end: span 1;
 }
+@import "row"

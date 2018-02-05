@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Row from './row.js'
+import Row from './row.js';
 
 class TopTenBoard extends React.Component {
   render() {
     return (
-      <div classname="toptenboard">
+      <div className="toptenboard">
         <h1>Top 10 Users</h1>
-        <div classname="rows">
+        <div className="rows">
           <Row position="1" username="David" score="999"/>
           <Row position="2" username="Andrew" score="800"/>
           <Row position="3" username="Bob" score="700"/>
