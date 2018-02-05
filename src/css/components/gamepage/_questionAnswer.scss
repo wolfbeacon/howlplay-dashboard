@@ -1,0 +1,9 @@
+.answer {
+  display: grid;
+  grid-template-columns: 30%;
+  margin: 20px;
+}
+
+.answer:hover {
+  background-color: grey;
+}

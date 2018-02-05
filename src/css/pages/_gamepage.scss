@@ -1,0 +1,10 @@
+#gamepage {
+  display: grid;
+  grid-template-columns: 20% 30px auto 30px 20%;
+  // grid-template-rows: 300px auto 300px;
+   grid-template-rows: 25% auto 25%;
+   width : 100vw;
+   height: 100vh;
+}
+
+@import '../components/gamepage/question'
