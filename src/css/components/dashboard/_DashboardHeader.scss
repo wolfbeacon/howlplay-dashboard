@@ -22,6 +22,12 @@
   display: none;
   @include tablet {
     display: block;
+    width: 60px;
+    height: 60px;
+  }
+  @include large-desktop {
+    height: 85px;
+    width: 85px;
   }
 }
 
