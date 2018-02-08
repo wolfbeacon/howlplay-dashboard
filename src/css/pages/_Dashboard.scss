@@ -1,0 +1,24 @@
+#dashboard {
+  grid-template: "h h" "n c";
+  grid-template-rows: 58px auto;
+  grid-template-columns: 245px auto;
+}
+
+#dashboard-header {
+  grid-area: h;
+  background-color: $off-white;
+
+}
+
+#dashboard-navbar {
+  background-color: $dark-gray;
+  grid-area: n;
+}
+
+#dashboard-content {
+  grid-area: c;
+}
+
+@import "../components/dashboard/DashboardNavbar";
+@import "../components/dashboard/DashboardHeader";
+@import "../components/dashboard/DashboardContent";

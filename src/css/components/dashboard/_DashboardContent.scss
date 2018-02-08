@@ -1,0 +1,60 @@
+#dashboard-content {
+  background-color: $light-gray;
+  padding: 20px;
+}
+
+#dashboard-content-header {
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+#dashboard-content-controls {
+  margin-top: 4px;
+  margin-left: auto;
+}
+
+.quiz-name-edit-label {
+  font-size: 2em;
+}
+
+.group-name-edit-label {
+  font-size: 1.4em;
+}
+
+.group-editable {
+  margin-top: 20px;
+}
+
+.quiz-button {
+  border: none;
+  font-size: 0.75em;
+  width: 60px;
+  padding: 10px 0;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out 0s;
+  color: white;
+}
+
+.quiz-button:focus {
+  outline: none;
+}
+
+#start-quiz-button {
+  margin-right: 10px;
+  background-color: $primary;
+}
+
+
+#delete-quiz-button {
+  background-color: $red;
+}
+
+@include tablet {
+  #start-quiz-button:hover {
+    background-color: $primary-dark;
+  }
+
+  #delete-quiz-button:hover {
+    background-color: $red-dark;
+  }
+}

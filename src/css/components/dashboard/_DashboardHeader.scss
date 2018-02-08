@@ -1,0 +1,81 @@
+#dashboard-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  z-index: 1;
+}
+
+#dashboard-header-logout {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  height: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+  transition: background-color 0.3s ease-in-out 0s;
+}
+
+#dashboard-header-breadcrumb {
+  padding-left: 24px;
+  font-size: 1.1em;
+  display: flex;
+  align-items: center;
+}
+
+#dashboard-header-breadcrumb p {
+  margin-right: 8px;
+}
+
+#dashboard-header-logout > p {
+  margin-right: 8px;
+}
+
+#dashboard-header-logout:hover, #dashboard-header-logout:focus {
+  background-color: $pressed-gray;
+}
+
+#dashboard-header-body {
+  color: $darker-gray;
+  display: flex;
+  flex-grow: 1;
+  height: 100%;
+  align-items: center;
+  padding: 10px 0;
+}
+
+#dashboard-header-style {
+  display: flex;
+  background-color: $darker-gray;
+  color: white;
+  width: 245px;
+  height: 100%;
+  font-size: 0.85em;
+  align-items: center;
+}
+
+#dashboard-title {
+  margin: 0;
+  font-size: 1.5em;
+  @include tablet {
+    margin: 12px;
+    font-size: 2em;
+  }
+
+}
+#dashboard-logo {
+  margin-left: 5px;
+  margin-right: -5px;
+  height: 80%;
+}
+
+#dashboard-header-dropdown-button {
+  margin: 0 12px 0 auto;
+  background-size: contain;
+  border: none;
+  width: 20px;
+  height: 20px;
+  @include tablet {
+    display: none;
+  }
+}

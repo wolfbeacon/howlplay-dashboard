@@ -1,0 +1,35 @@
+#dashboard-navbar {
+  flex-direction: column;
+  align-items: flex-start;
+  color: white;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  z-index: 2;
+
+  @include tablet {
+    position: relative;
+    padding: 20px;
+  }
+}
+
+#dashboard-navbar-items {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-nav-expanded {
+  display: flex;
+  color: #026fda;
+}
+
+.dashboard-nav-collapsed {
+  display: none;
+  @include tablet {
+    display: flex;
+  }
+}
+
+@import "GroupNavbarItem";
+@import "QuizNavbarItem";
