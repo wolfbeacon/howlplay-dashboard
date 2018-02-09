@@ -4,6 +4,8 @@
   align-items: center;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   z-index: 1;
+  position: relative;
+  animation: fade-in-down 0.6s ease-in-out 0s;
 }
 
 #dashboard-header-logout {
@@ -17,10 +19,14 @@
 }
 
 #dashboard-header-breadcrumb {
-  padding-left: 24px;
-  font-size: 1.1em;
-  display: flex;
-  align-items: center;
+  display: none;
+
+  @include tablet {
+    padding-left: 24px;
+    font-size: 1.1em;
+    display: flex;
+    align-items: center;
+  }
 }
 
 #dashboard-header-breadcrumb p {
@@ -45,27 +51,39 @@
 }
 
 #dashboard-header-style {
+
   display: flex;
   background-color: $darker-gray;
   color: white;
-  width: 245px;
   height: 100%;
-  font-size: 0.85em;
   align-items: center;
+  position: relative;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  width: 61px;
+
+  opacity: 0;
+  left: -240px;
+  animation: fade-in-right 0.6s ease-in-out 0.2s forwards;
+  transition: width 0.4s ease-in-out 0s;
+
+  @include phone {
+    width: 245px;
+    font-size: 0.85em;
+  }
 }
 
 #dashboard-title {
-  margin: 0;
-  font-size: 1.5em;
-  @include tablet {
-    margin: 12px;
-    font-size: 2em;
+  display: none;
+  @include phone {
+    display: block;
+    margin: 0;
+    font-size: 1.5em;
   }
 
 }
 #dashboard-logo {
   margin-left: 5px;
-  margin-right: -5px;
+  margin-right: 5px;
   height: 80%;
 }
 

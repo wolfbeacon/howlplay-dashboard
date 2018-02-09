@@ -4,7 +4,7 @@ import DashboardNavbar from "../components/dashboard/DashboardNavbar";
 import DashboardContent from "../components/dashboard/DashboardContent";
 
 const Dashboard = () =>
-    <div className={"page"} id={"dashboard"}>
+    <div id={"dashboard"}>
         <DashboardHeader/>
         <DashboardNavbar/>
         <DashboardContent/>

@@ -1,0 +1,9 @@
+@keyframes fade-in-down {
+  from {opacity: 0; top: -40px;}
+  to {opacity: 1; top: 0;}
+}
+
+@keyframes fade-in-right {
+  from {opacity: 0; left: -240px;}
+  to {opacity: 1; left: 0;}
+}
