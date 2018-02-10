@@ -7,9 +7,11 @@ import createHistory from 'history/createBrowserHistory';
 import {Router, Route, Switch} from 'react-router';
 import {routerReducer} from 'react-router-redux';
 
+import Login from "./pages/Login";
 import NotFound from "./pages/404"
 import Homepage from './pages/Homepage';
 import GamePage from './pages/gamepage';
+
 import './css/main.scss';
 
 // we'll worry about redux later I just set this up so that way I can set up the redux router
@@ -28,6 +30,7 @@ ReactDOM.render(
             <Switch>
                 <Route exact path="/" component={Homepage}/>
                 <Route exact path="/gamepage" component={GamePage}/>
+                <Route exact path="/login" component={Login}/>
                 <Route component={NotFound}/> {/*404 Route*/}
             </Switch>
         </Router>
