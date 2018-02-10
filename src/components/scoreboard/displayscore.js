@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import TopTenBoard from '../components/scoreboard/topten.js'
-import CountdownTimer from '../components/timer/countdownTimer.js'
-import StopGameButton from '../components/timer/stopGameButton.js'
+import TopTenBoard from '../scoreboard/topten.js'
+import CountdownTimer from '../timer/countdownTimer.js'
+import StopGameButton from '../timer/stopGameButton.js'
 
 class DisplayScore extends Component {
   render() {
