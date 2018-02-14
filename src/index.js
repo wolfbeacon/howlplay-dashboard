@@ -7,6 +7,7 @@ import createHistory from 'history/createBrowserHistory';
 import {Router, Route, Switch} from 'react-router';
 import {routerReducer} from 'react-router-redux';
 
+import DisplayScore from './components/scoreboard/DisplayScore';
 import Login from "./pages/Login";
 import NotFound from "./pages/404";
 import GamePage from './pages/gamepage';
@@ -27,6 +28,7 @@ ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
             <Switch>
+                <Route exact path="/displayscore" component={DisplayScore}/>
                 <Route exact path="/" component={Login}/>
                 <Route exact path="/gamepage" component={GamePage}/>
                 <Route component={NotFound}/> {/*404 Route*/}
