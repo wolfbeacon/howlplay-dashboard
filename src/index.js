@@ -26,7 +26,7 @@ ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
             <Switch>
-                // <Route exact path="/" component={Homepage}/>
+                <Route exact path="/" component={Homepage}/>
                 <Route exact path="/displayscore" component={DisplayScore}/>
                 <Route component={NotFound}/> {/*404 Route*/}
             </Switch>

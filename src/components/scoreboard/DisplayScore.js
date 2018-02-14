@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import TopTenBoard from './TopTen.js'
 import CountdownTimer from '../timer/CountdownTimer.js'
 import StopGameButton from '../timer/StopGameButton.js'
 
-class DisplayScore extends Component {
+class DisplayScore extends React.Component {
   render() {
     return(
       <div className="display-score-screen">
