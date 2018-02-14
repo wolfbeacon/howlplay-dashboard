@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Row from './row.js';
+import Row from './Row.js';
 
 class TopTenBoard extends React.Component {
   render() {
