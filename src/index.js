@@ -7,7 +7,6 @@ import createHistory from 'history/createBrowserHistory';
 import {Router, Route, Switch} from 'react-router';
 import {routerReducer} from 'react-router-redux';
 
-import Homepage from './pages/Homepage';
 import DisplayScore from './components/scoreboard/DisplayScore';
 import Login from "./pages/Login";
 import NotFound from "./pages/404";
