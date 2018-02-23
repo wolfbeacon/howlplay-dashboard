@@ -6,8 +6,10 @@ import DashboardContent from "../components/dashboard/DashboardContent";
 const Dashboard = () =>
     <div id={"dashboard"}>
         <DashboardHeader/>
-        <DashboardNavbar/>
-        <DashboardContent/>
+        <div id="dashboard-body">
+          <DashboardNavbar/>
+          <DashboardContent/>
+        </div>
     </div>;
 
 
