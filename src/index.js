@@ -10,7 +10,6 @@ import {routerReducer} from 'react-router-redux';
 import DisplayScore from './components/scoreboard/DisplayScore';
 import Login from "./pages/Login";
 import NotFound from "./pages/404";
-import GamePage from './pages/gamepage';
 
 import './css/main.scss';
 
