@@ -1,0 +1,49 @@
+#dashboard-navbar {
+  flex-direction: column;
+  align-items: flex-start;
+  color: white;
+  z-index: 2;
+  box-sizing: border-box;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  opacity: 0;
+  left: -240px;
+  position: relative;
+  animation: fade-in-right 0.6s ease-in-out 0.2s forwards;
+  width: 0px;
+  padding: 0;
+  transition: width 0.4s ease-in-out 0s;
+  overflow: hidden;
+
+  @include phone {
+    width: 61px;
+  }
+
+  @include tablet {
+    width: 245px;
+  }
+}
+
+#dashboard-navbar:hover {
+  width: 245px;
+}
+
+#dashboard-navbar-items {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-nav-expanded {
+  display: flex;
+  color: #026fda;
+}
+
+.dashboard-nav-collapsed {
+  display: none;
+  @include tablet {
+    display: flex;
+  }
+}
+
+@import "GroupNavbarItem";
+@import "QuizNavbarItem";

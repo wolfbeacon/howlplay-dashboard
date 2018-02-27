@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import logo from '../../logo.svg';
+import logo from '../../media/logo.svg';
+import StyledTitle from "../StyledTitle";
 
 class LoginForm extends Component {
     render() {
@@ -8,7 +9,7 @@ class LoginForm extends Component {
               <div id="login-body">
                 <img src={logo} id="login-logo" alt="logo" />
                 <div>
-                  <h1 id="login-heading"><span id="login-heading-accent">Howl</span>Play</h1>
+                  <StyledTitle/>
                   <h3 id="login-subheading">Admin Login</h3>
                   <div className="login-input-section">
                       <label className="login-form-label sr-only" htmlFor="username-input">Username</label>

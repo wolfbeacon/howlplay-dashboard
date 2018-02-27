@@ -1,5 +1,6 @@
 @import "mixins";
 @import "colors";
+@import "animations";
 @import url('https://fonts.googleapis.com/css?family=Montserrat:600|Roboto');
 
 html, body, #root, .page {
@@ -19,6 +20,7 @@ h1, h2, h3, h4, h5, p {
 .page {
   display: flex;
   flex-direction: column;
+  background-color: $off-white;
   @include tablet {
     display: grid;
   }
@@ -36,7 +38,10 @@ h1, h2, h3, h4, h5, p {
   clip-path:inset(50%);
   border:0
 }
+
+@import "components/EditableLabel";
+@import "components/StyledTitle";
 @import "pages/404";
-@import "pages/gamepage";
 @import "pages/Login";
-@import "pages/displayScore"
+@import "pages/Dashboard";
+@import "pages/displayScore";

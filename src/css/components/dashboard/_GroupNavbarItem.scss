@@ -1,0 +1,55 @@
+.group-navbar-item {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  font-size: 0.95em;
+  transition: background-color 0.2s ease-in-out 0s;
+}
+
+.group-navbar-item:hover, .group-navbar-item:active, .group-navbar-item:focus {
+  background-color: rgba(255,255,255,0.1);
+}
+
+.group-navbar-header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+  align-items: center;
+}
+
+.group-navbar-icon {
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.hackathon-icon {
+  height: 40px;
+  width: 40px;
+  margin: 0;
+  transition: all 0.4s ease-in-out 0s;
+
+  @include tablet {
+    margin-right: 10px;
+    height: 35px;
+    width: 35px;
+  }
+}
+
+.group-dropdown-icon {
+  display: none;
+  padding-right: 8px;
+  margin-left: auto;
+
+  @include tablet {
+    display: block;
+  }
+}
+
+.group-navbar-title {
+  display: none;
+
+  @include tablet {
+    display: block;
+  }
+}
