@@ -1,10 +1,15 @@
 #dashboard {
   display: grid;
-  grid-template: "h h" "n c";
+  grid-template: "h h" "c c";
   grid-template-rows: 58px auto;
-  grid-template-columns: 245px auto;
   background-color: $light-gray;
   height: 100%;
+}
+
+#dashboard-body {
+  grid-area: c;
+  display: flex;
+  width: 100%;
 }
 
 #dashboard-header {
@@ -14,11 +19,8 @@
 
 #dashboard-navbar {
   background-color: $dark-gray;
-  grid-area: n;
-}
-
-#dashboard-content {
-  grid-area: c;
+  max-width: 245px;
+  height: 100%;
 }
 
 @import "../components/dashboard/DashboardNavbar";

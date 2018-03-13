@@ -18,10 +18,10 @@ const DashboardHeader = ({expanded, toggleNavbar}) => <div id={"dashboard-header
         <p>Home</p><FontAwesomeIcon icon={faAngleRight} size="lg"/>
       </div>
       <div id="dashboard-header-logout">
-        <p>Logout</p><FontAwesomeIcon icon={faSignOutAlt}/>
+        <p>Logout</p><FontAwesomeIcon icon={faSignOutAlt} />
       </div>
     </div>
-    {/* <div id={"dashboard-header-dropdown-button"} style={{backgroundImage: `url(${(expanded) ? CloseIcon : MenuIcon})`}} onClick={toggleNavbar}/> */}
+    { /*<div id={"dashboard-header-dropdown-button"} style={{backgroundImage: `url(${(expanded) ? CloseIcon : MenuIcon})`}} onClick={toggleNavbar}/>*/ }
 </div>;
 
 const mapStateToProps = (state) => ({

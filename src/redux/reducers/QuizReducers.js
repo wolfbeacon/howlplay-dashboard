@@ -4,11 +4,13 @@ const group_default_state = {
     "abc" : {
         expanded: false,
         name: "Hackathon1",
+        icon: "/icons/A.jpg",
         quizzes: ["q123"]
     },
     "123" : {
         expanded: false,
         name: "Hackathon2",
+        icon: "/icons/Fox.jpg",
         quizzes: ["qabc"]
     }
 };
