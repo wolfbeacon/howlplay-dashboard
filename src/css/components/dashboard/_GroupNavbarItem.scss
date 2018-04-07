@@ -37,19 +37,24 @@
 }
 
 .group-dropdown-icon {
-  display: none;
   padding-right: 8px;
   margin-left: auto;
-
-  @include tablet {
-    display: block;
-  }
 }
 
 .group-navbar-title {
-  display: none;
+  padding-left: 10px;
+}
 
-  @include tablet {
-    display: block;
-  }
+.quizzes-group {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.quizzes-group-collapsed {
+  display: none;
+}
+
+.quizzes-group-expanded {
+  display: flex;
 }

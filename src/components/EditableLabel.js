@@ -1,10 +1,12 @@
 import {Component} from "react";
 import React from "react";
 
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import EditIcon from "@fortawesome/fontawesome-free-solid/faEdit";
+
 class EditableLabel extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             isEditing: this.props.isEditing || false,
             text: this.props.text || "",
@@ -71,8 +73,7 @@ class EditableLabel extends Component {
             <label className={this.props.labelClassName}>
                 {this.state.text}
             </label>
-            <div className={"edit-icon"} style={{backgroundImage: `url(${this.props.editIcon})`,
-                display: `${(this.state.text !== "") ? "inline-block" : "none"}`}}/>
+            <FontAwesomeIcon className={"edit-icon"} icon={EditIcon} style={{display: `${(this.state.text !== "") ? "inline-block" : "none"}`}} size="lg" />
         </div>;
     }
 }

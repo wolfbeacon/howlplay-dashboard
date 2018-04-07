@@ -1,7 +1,7 @@
 import cloneDeep from "lodash/cloneDeep";
 
 const navbar_default_state = {
-    expanded: true,
+    expanded: false,
     groups: ["abc", "123"] // array of group ids
 };
 
@@ -16,4 +16,3 @@ export const DashboardNavbarReducer = (state=navbar_default_state, action) => {
     }
     return newState;
 };
-

@@ -1,8 +1,14 @@
 .edit-icon {
-  margin-left: 10px;
+  margin-left: 8px;
   display: inline-block;
-  background-size: contain;
-  background-repeat: no-repeat;
-  width: 20px;
-  height: 20px;
+  transition: color 0.2s ease-in-out 0s;
+}
+
+.edit-icon:hover {
+  color: $primary;
+}
+
+.edit-label {
+  display: flex;
+  align-items: center;
 }

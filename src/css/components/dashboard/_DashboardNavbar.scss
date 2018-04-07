@@ -1,4 +1,5 @@
 #dashboard-navbar {
+  display: flex;
   flex-direction: column;
   align-items: flex-start;
   color: white;
@@ -9,22 +10,9 @@
   left: -240px;
   position: relative;
   animation: fade-in-right 0.6s ease-in-out 0.2s forwards;
-  width: 0px;
   padding: 0;
   transition: width 0.4s ease-in-out 0s;
   overflow: hidden;
-
-  @include phone {
-    width: 61px;
-  }
-
-  @include tablet {
-    width: 245px;
-  }
-}
-
-#dashboard-navbar:hover {
-  width: 245px;
 }
 
 #dashboard-navbar-items {
@@ -34,14 +22,44 @@
 }
 
 .dashboard-nav-expanded {
-  display: flex;
+  width: 245px;
   color: #026fda;
 }
 
 .dashboard-nav-collapsed {
-  display: none;
-  @include tablet {
+  width: 0px;
+}
+
+.dashboard-nav-collapsed .quizzes-group {
+  display: inherit;
+}
+
+@include phone {
+  .dashboard-nav-collapsed {
+    width: 61px;
+    pointer-events: none;
+  }
+
+  .dashboard-nav-collapsed .quizzes-group, .dashboard-nav-collapsed .group-navbar-title, .dashboard-nav-collapsed .group-dropdown-icon {
+    display: none;
+  }
+}
+
+@include tablet {
+  .dashboard-nav-collapsed {
+    width: 245px;
+  }
+
+  .dashboard-nav-collapsed .group-navbar-title, .dashboard-nav-collapsed .group-dropdown-icon {
     display: flex;
+  }
+
+  .dashboard-nav-collapsed {
+    pointer-events: all;
+  }
+
+  .quizzes-group-expanded {
+    display: flex !important;
   }
 }
 

@@ -8,6 +8,21 @@
   animation: fade-in-down 0.6s ease-in-out 0s;
 }
 
+#dashboard-header-menu {
+  display: flex;
+  align-items: center;
+  padding-left: 18px;
+  font-size: 1em;
+
+  @include tablet {
+    display: none;
+  }
+}
+
+#dashboard-header-menu > p {
+  margin-left: 12px;
+}
+
 #dashboard-header-logout {
   display: flex;
   align-items: center;
@@ -23,7 +38,6 @@
 
   @include tablet {
     padding-left: 24px;
-    font-size: 1.1em;
     display: flex;
     align-items: center;
   }
@@ -31,6 +45,7 @@
 
 #dashboard-header-breadcrumb p {
   margin-right: 8px;
+  font-size: 1.1em;
 }
 
 #dashboard-header-logout > p {
