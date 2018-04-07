@@ -1,0 +1,12 @@
+.countdown-timer {
+  grid-column-start: 4;
+  grid-row-start: 1;
+  // grid-row-end: span 2;
+  margin: auto;
+  margin-top: 50px;
+}
+
+.countdown-timer .time-left {
+  font-size: 60px;
+  text-align: center;
+}
