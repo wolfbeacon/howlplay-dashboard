@@ -3,10 +3,17 @@
   margin-left: 32px;
   width: 100%;
   cursor: pointer;
+  display: none;
+
+  @include tablet {
+    display: block;
+  }
 }
 
-@include tablet {
-  .quiz-navbar-name:hover {
-    color: $primary;
-  }
+.quiz-navbar-name {
+  transition: color 0.2s ease-in-out 0s;
+}
+
+.quiz-navbar-name:hover {
+  color: $primary;
 }
