@@ -15,8 +15,8 @@ const DashboardHeader = ({expanded, toggleNavbar}) => <div id={"dashboard-header
       <StyledTitle id={"dashboard-title"}/>
     </div>
     <div id="dashboard-header-body">
-      <div id="dashboard-header-menu">
-        <FontAwesomeIcon icon={faBars} size="lg"/><p>Menu</p>
+      <div id="dashboard-header-menu" onClick={toggleNavbar}>
+        <FontAwesomeIcon icon={faBars} size="sm"/><p>Menu</p>
       </div>
       <div id="dashboard-header-breadcrumb">
         <p>Home</p><FontAwesomeIcon icon={faAngleRight} size="lg"/>

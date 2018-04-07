@@ -3,11 +3,6 @@
   margin-left: 32px;
   width: 100%;
   cursor: pointer;
-  display: none;
-
-  @include tablet {
-    display: block;
-  }
 }
 
 .quiz-navbar-name {
