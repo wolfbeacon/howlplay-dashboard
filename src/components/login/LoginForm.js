@@ -12,12 +12,8 @@ class LoginForm extends Component {
                   <StyledTitle/>
                   <h3 id="login-subheading">Admin Login</h3>
                   <div className="login-input-section">
-                      <label className="login-form-label sr-only" htmlFor="username-input">Username</label>
-                      <input type="text" className="login-input" id="username-input" placeholder="Username"/>
-                  </div>
-                  <div className="login-input-section">
-                      <label className="login-form-label sr-only" htmlFor="password-input">Password</label>
-                      <input type="password" className="login-input" id="password-input" placeholder="Password"/>
+                      <label className="login-form-label sr-only" htmlFor="access-key-input">Access Key</label>
+                      <input type="text" className="login-input" id="access-key-input" placeholder="Access Key"/>
                   </div>
                 </div>
               </div>
