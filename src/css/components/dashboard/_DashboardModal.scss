@@ -11,6 +11,44 @@
   margin: 0;
 }
 
+#dashboard-modal .modal-content-headers {
+  color: $primary;
+}
+
+#modal-content-submit {
+  margin-top: 14px;
+  padding: 13px 26px;
+  background-color: $primary;
+  border: none;
+  color: white;
+  transition: background-color 0.2s ease-in-out 0s;
+}
+
+#modal-content-submit:hover {
+  background-color: $primary-dark;
+}
+
+.dashboard-modal-meta {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.dashboard-modal-meta input {
+  border: none;
+  padding: 10px 16px;
+  background-color: rgba(0,0,0,0.04);
+  margin-top: 6px;
+}
+
+.dashboard-modal-meta select {
+  border: none;
+  padding: 10px 12px;
+  background-color: rgba(0,0,0,0.04);
+  color: rgba(0,0,0,0.6);
+  margin-top: 6px;
+}
+
 .dashboard-modal-header {
   display: flex;
   align-items: center;
@@ -54,8 +92,14 @@
 }
 
 .dashboard-modal-content {
-  display: flex;
-  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.dashboard-modal-inputs .modal-question-item:first-child {
+  padding-top: 6px;
 }
 
 #dashboard-modal-backdrop {
@@ -64,3 +108,5 @@
   height: 100%;
   width: 100%;
 }
+
+@import "./ModalQuestionItem";
