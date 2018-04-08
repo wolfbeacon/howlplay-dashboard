@@ -34,13 +34,37 @@
   display: inherit;
 }
 
+.dashboard-navbar-addicon {
+  margin-left: auto;
+  margin-right: 10px;
+}
+
+#dashboard-navbar-addquiz {
+  display: flex;
+  align-items: center;
+  padding: 14px;
+  transition: background-color 0.4s ease-in-out 0s;
+}
+
+#dashboard-navbar-addquiz:hover {
+  background-color: rgba(0,0,0,0.2);
+}
+
+#dashboard-navbar-controller {
+  margin-top: auto;
+  margin-bottom: 0;
+  box-sizing: border-box;
+  background-color: rgba(0,0,0,0.24);
+  width: 100%;
+}
+
 @include phone {
   .dashboard-nav-collapsed {
     width: 61px;
     pointer-events: none;
   }
 
-  .dashboard-nav-collapsed .quizzes-group, .dashboard-nav-collapsed .group-navbar-title, .dashboard-nav-collapsed .group-dropdown-icon {
+  .dashboard-nav-collapsed .quizzes-group, .dashboard-nav-collapsed .group-navbar-title, .dashboard-nav-collapsed .group-dropdown-icon, .dashboard-nav-collapsed #dashboard-navbar-addquiz h4 {
     display: none;
   }
 }
@@ -50,7 +74,7 @@
     width: 245px;
   }
 
-  .dashboard-nav-collapsed .group-navbar-title, .dashboard-nav-collapsed .group-dropdown-icon {
+  .dashboard-nav-collapsed .group-navbar-title, .dashboard-nav-collapsed .group-dropdown-icon, .dashboard-nav-collapsed #dashboard-navbar-addquiz h4 {
     display: flex;
   }
 
