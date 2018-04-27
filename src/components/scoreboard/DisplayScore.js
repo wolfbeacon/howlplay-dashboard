@@ -9,7 +9,7 @@ class DisplayScore extends React.Component {
   render() {
     return(
       <div className="display-score-screen">
-        <TopTenBoard />
+        <TopTenBoard serverlink={server} />
         <CountdownTimer />
         <div className="active-users">Active Users: 99999</div>
         <StopGameButton />
