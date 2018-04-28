@@ -1,12 +1,17 @@
 #scoreboard {
-  background-color: $dark-gray;
+  background-color: white;
   min-height: 400px;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px;
+  padding: 0px;
   box-sizing: border-box;
+
+  @include phone {
+    padding: 40px;
+    background-color: $dark-gray;
+  }
 }
 
 .display-score-screen {
@@ -24,14 +29,23 @@
   background-color: white;
   padding: 20px 24px;
   padding-bottom: 26px;
-  margin: 5px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  margin: 0;
+  box-shadow: none;
+  @include phone {
+    margin: 5px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  }
 }
 
 .display-card:first-child {
   flex: auto;
+  padding-bottom: 0;
   @include tablet {
     flex: 2;
+  }
+
+  @include phone {
+    padding-bottom: 26px;
   }
 }
 
