@@ -1,12 +1,16 @@
-.toptenboard {
-  grid-column-start: 1;
-  grid-column-end: span 3;
-  grid-row-start: 1;
-  grid-row-end: span 2;
+.table {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
 }
 
-.active-users {
-  grid-row-start: 3;
-  grid-row-end: span 1;
+.rows {
+  display: table-row-group;
 }
+
+.toptenboard-title {
+  padding-bottom: 12px;
+  font-size: 1.6rem;
+}
+
 @import "row"

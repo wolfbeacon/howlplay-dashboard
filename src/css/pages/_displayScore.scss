@@ -1,15 +1,61 @@
-.display-score-screen {
-  display: grid;
-  grid-template-columns: 10% 30% auto 30% 10%;
-  grid-template-rows: 10% 25% auto;
+#scoreboard {
+  background-color: $dark-gray;
+  min-height: 400px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  box-sizing: border-box;
 }
 
-.active-users {
-  font-size: 20px;
-  margin-top: 30px;
+.display-score-screen {
+  display: flex;
+  width: 100%;
+  margin: 0 -5px;
+  flex-direction: column;
+
+  @include tablet {
+    flex-direction: row;
+  }
+}
+
+.display-card {
+  background-color: white;
+  padding: 20px 24px;
+  padding-bottom: 26px;
+  margin: 5px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.display-card:first-child {
+  flex: auto;
+  @include tablet {
+    flex: 2;
+  }
+}
+
+.display-card:last-child {
+  flex: auto;
+  @include tablet {
+    flex: 1;
+  }
+}
+
+#btn-stop-game {
+  border: none;
+  color: white;
+  padding: 11px 20px;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  margin-top: 6px;
+  background-color: $primary;
+  transition: background-color 0.2s ease-in-out 0s;
+}
+
+#btn-stop-game:hover {
+  background-color: $primary-dark;
 }
 
 @import "../components/scoreboard/topten";
 @import "../components/scoreboard/row";
-@import "../components/timer/countdownTimer";
-@import "../components/timer/stopGameButton"
