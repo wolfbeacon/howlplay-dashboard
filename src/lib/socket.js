@@ -13,7 +13,12 @@ class ScoreBoardSocketApi {
       switch(e.data) {
         case 0:
           console.log("player joined quiz");
-
+          break;
+        case 1:
+          console.log("player left quiz");
+          break;
+        default:
+          break;
       }
     }
   }
