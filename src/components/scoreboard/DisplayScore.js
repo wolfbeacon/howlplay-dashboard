@@ -8,6 +8,8 @@ import ScoreBoardSocketApi from '../../lib/socket.js'
 const url = "ws://localhost:3000";
 const socket = new ScoreBoardSocketApi(url);
 
+const server = "jdbc:postgresql://howlplay-db.czfcpgzgc9ja.us-west-2.rds.amazonaws.com:5432/howlplay";
+
 class DisplayScore extends React.Component {
   render() {
     // remove this later. Only meant for preventing Travis errors
@@ -15,7 +17,7 @@ class DisplayScore extends React.Component {
     
     return(
       <div className="display-score-screen">
-        <TopTenBoard />
+        <TopTenBoard serverlink={server} />
         <CountdownTimer />
         <div className="active-users">Active Users: 99999</div>
         <StopGameButton />
