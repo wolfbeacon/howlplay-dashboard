@@ -1,25 +1,13 @@
+
+
 class ScoreBoardSocketApi {
   constructor(url) {
     this.socket = new WebSocket(url);
-    this.socket.binarytype = "blob";
+    this.socket.binaryType = 'arraybuffer';
 
-    // Replace/remove it whenever
-    this.socket.onopen = () => {
-      this.socket.send("Hello World");
-    };
-
-    this.socket.onmessage = (e) => {
-      console.log(e.data);
-      switch(e.data) {
-        case 0:
-          console.log("player joined quiz");
-          break;
-        case 1:
-          console.log("player left quiz");
-          break;
-        default:
-          break;
-      }
+    this.socket.sendCode = (code) => {
+      var payload = new Uint8Array([code]);
+      this.socket.send(payload);
     }
   }
 }
