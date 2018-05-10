@@ -4,6 +4,9 @@ import CountdownTimer from '../timer/CountdownTimer.js'
 import StopGameButton from '../timer/StopGameButton.js'
 import ScoreBoardSocketApi from '../../lib/socket.js'
 import util from '../../lib/util';
+import {bindActionCreators} from "redux"
+import {connect} from "react-redux"
+import {getPlayers} from '../../redux/actions/ScoreboardActions'
 
 // url is temporary, change it to the appropiate websocket link later
 const url = "ws://localhost:9090";
@@ -57,4 +60,8 @@ class DisplayScore extends React.Component {
   }
 }
 
-export default DisplayScore;
+// export default DisplayScore;
+
+const mapDispatchToProps = dispatch => bindActionCreators({getPlayers}, dispatch);
+
+export default connect(null, mapDispatchToProps)(DisplayScore);
