@@ -1,11 +1,14 @@
+
+
 class ScoreBoardSocketApi {
   constructor(url) {
     this.socket = new WebSocket(url);
+    this.socket.binaryType = 'arraybuffer';
 
-    // This is just to prevent warnings with Travis. Replace/remove it whenever
-    this.socket.onopen = () => {
-      this.socket.send("Hello World");
-    };
+    this.socket.sendCode = (code) => {
+      var payload = new Uint8Array([code]);
+      this.socket.send(payload);
+    }
   }
 }
 

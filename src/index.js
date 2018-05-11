@@ -16,6 +16,7 @@ import './css/main.scss';
 import {DashboardNavbarReducer} from "./redux/reducers/DashboardReducers";
 import {GroupReducer, QuizReducer} from "./redux/reducers/QuizReducers";
 import {ModalReducer} from "./redux/reducers/ModalReducers";
+import {ScoreboardReducer} from "./redux/reducers/ScoreboardReducers";
 import Dashboard from "./pages/Dashboard";
 import {HashRouter} from "react-router-dom";
 
@@ -26,7 +27,8 @@ const store = createStore(
         dashboardNavbar: DashboardNavbarReducer,
         quizGroups: GroupReducer,
         quiz: QuizReducer,
-        modal: ModalReducer
+        modal: ModalReducer,
+        scoreboard: ScoreboardReducer
     })
 );
 
