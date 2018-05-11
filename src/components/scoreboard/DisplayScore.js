@@ -33,7 +33,7 @@ class DisplayScore extends React.Component {
       .then(function(res) {
         return res.json();
       }).then(function(data) {
-        answers = data.questions.map(x => x.answer);
+        answers = data.questions.map(x => parseInt(x.answer));
       });
 
     setInterval(() => { api.socket.sendCode(14); }, 1000);
