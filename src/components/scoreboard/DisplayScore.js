@@ -5,11 +5,12 @@ import util from '../../lib/util';
 
 // url is temporary, change it to the appropiate websocket link later
 const url = "ws://localhost:9090";
-const answers = [0, 2, 1, 2, 1];
+// const answers = [0, 2, 1, 2, 1];
 const api = new ScoreBoardSocketApi(url);
 
 // const server = "jdbc:postgresql://howlplay-db.czfcpgzgc9ja.us-west-2.rds.amazonaws.com:5432/howlplay";
 var users = [];
+var answers = [];
 // var len = 0;
 
 function getCode (buf) {
@@ -40,11 +41,18 @@ class DisplayScore extends React.Component {
         });
 
         users.sort((a, b) => { return b.score - a.score; });
-        // console.log(users);
         this.setState({players: users});
+        console.log(this.state);
         // this.setState({players: ["Test", "Test1"]});
       }
     }
+
+    fetch('http://localhost:8080/quiz/14')
+      .then(function(res) {
+        return res.json();
+      }).then(function(data) {
+        answers = data.questions.map(x => x.answer);
+      });
 
     setInterval(() => { api.socket.sendCode(14); }, 1000);
     setInterval(() => { api.socket.sendCode(0); }, 2000);
