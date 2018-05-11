@@ -7,12 +7,12 @@ import util from '../../lib/util';
 
 // url is temporary, change it to the appropiate websocket link later
 const url = "ws://localhost:9090";
-const answers = [0, 2, 1, 2, 1];
+// const answers = [0, 2, 1, 2, 1];
 const api = new ScoreBoardSocketApi(url);
 
 const server = "jdbc:postgresql://howlplay-db.czfcpgzgc9ja.us-west-2.rds.amazonaws.com:5432/howlplay";
 var users = [];
-var len = 0;
+// var len = 0;
 
 function getCode (buf) {
     let dataView = new Uint8Array(buf);
@@ -31,7 +31,7 @@ class DisplayScore extends React.Component {
 
     api.socket.onmessage = (e) => {
       var code = getCode(e.data);
-      if (code == 14) {
+      if (code === 14) {
         var data = new Uint8Array(e.data);
         users = JSON.parse(util.arrayBufferToString(data.slice(1)));
         this.setState({players: users});
