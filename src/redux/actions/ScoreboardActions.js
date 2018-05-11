@@ -1,5 +1,7 @@
-export function getPlayers() {
+export function updatePlayers(players) {
+  console.log("Now in getPlayers");
   return {
-    type : 'GET_PLAYERS'
+    type : 'UPDATE_PLAYERS',
+    payload : players
   }
 }
