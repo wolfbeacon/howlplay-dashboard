@@ -24,15 +24,29 @@ class DisplayScore extends React.Component {
     this.state = {
       players: []
     }
+
     api.socket.onopen = () => {
       api.socket.sendCode(14);
     }
 
+    fetch('http://localhost:8080/quiz/14')
+      .then(function(res) {
+        return res.json();
+      }).then(function(data) {
+        answers = data.questions.map(x => x.answer);
+      });
+
+    setInterval(() => { api.socket.sendCode(14); }, 1000);
+    setInterval(() => { api.socket.sendCode(0); }, 2000);
+  }
+
+  componentWillMount() {
     api.socket.onmessage = (e) => {
       var code = getCode(e.data);
       if (code === 14) {
         var data = new Uint8Array(e.data);
         users = JSON.parse(util.arrayBufferToString(data.slice(1))).slice(0, 10);
+        console.log(users);
         users.map((user) => {
           user.score = 0;
           return user.answers.map((answer, index) => {
@@ -47,15 +61,6 @@ class DisplayScore extends React.Component {
       }
     }
 
-    fetch('http://localhost:8080/quiz/14')
-      .then(function(res) {
-        return res.json();
-      }).then(function(data) {
-        answers = data.questions.map(x => x.answer);
-      });
-
-    setInterval(() => { api.socket.sendCode(14); }, 1000);
-    setInterval(() => { api.socket.sendCode(0); }, 2000);
   }
 
   render() {
@@ -69,6 +74,12 @@ class DisplayScore extends React.Component {
         <div className="display-card">
           <h2 className="time-left">Time Left <span id="timer-time">0:10</span></h2>
           <h3 className="active-users">Active Users: <span id="users-count">{users.length}</span></h3>
+          <div>Current users
+            <div>{this.state.players.map((player) => {
+              return <h4>{player.nickname}</h4>
+            })}
+            </div>
+          </div>
           <button id="btn-stop-game">End Game</button>
         </div>
       </div>
