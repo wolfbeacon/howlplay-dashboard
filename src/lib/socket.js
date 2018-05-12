@@ -6,8 +6,10 @@ class ScoreBoardSocketApi {
     this.socket.binaryType = 'arraybuffer';
 
     this.socket.sendCode = (code) => {
-      var payload = new Uint8Array([code]);
-      this.socket.send(payload);
+      if (this.socket.readyState === 1) {
+        var payload = new Uint8Array([code]);
+        this.socket.send(payload);
+      }
     }
   }
 }

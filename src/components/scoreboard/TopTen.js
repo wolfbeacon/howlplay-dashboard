@@ -9,7 +9,7 @@ class TopTenBoard extends React.Component {
         <div className="table">
           <div className="rows">
             {this.props.users.map((item, index) => {
-              return <Row position={index+1} username={item.username} score={item.score}/>
+              return <Row position={index+1} username={item.nickname} score={item.score}/>
             })}
           </div>
         </div>
