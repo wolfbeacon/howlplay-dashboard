@@ -6,7 +6,8 @@ import util from '../../lib/util';
 // url is temporary, change it to the appropiate websocket link later
 const url = "ws://localhost:9090";
 // const answers = [0, 2, 1, 2, 1];
-const api = new ScoreBoardSocketApi(url);
+// const api = new ScoreBoardSocketApi(url);
+let api = null;
 
 // const server = "jdbc:postgresql://howlplay-db.czfcpgzgc9ja.us-west-2.rds.amazonaws.com:5432/howlplay";
 var users = [];
@@ -24,23 +25,22 @@ class DisplayScore extends React.Component {
     this.state = {
       players: []
     }
-
-    api.socket.onopen = () => {
-      api.socket.sendCode(14);
-    }
-
+    api = new ScoreBoardSocketApi(url);
+    
     fetch('http://localhost:8080/quiz/14')
       .then(function(res) {
         return res.json();
       }).then(function(data) {
         answers = data.questions.map(x => parseInt(x.answer, 10));
       });
-
-    setInterval(() => { api.socket.sendCode(14); }, 1000);
-    setInterval(() => { api.socket.sendCode(0); }, 2000);
   }
 
   componentWillMount() {
+    api.socket.onopen = () => {
+      console.log("Opening socket");
+      api.socket.sendCode(14);
+    }
+
     api.socket.onmessage = (e) => {
       var code = getCode(e.data);
       if (code === 14) {
@@ -61,6 +61,12 @@ class DisplayScore extends React.Component {
       }
     }
 
+    setInterval(() => { api.socket.sendCode(14); }, 1000);
+    setInterval(() => { api.socket.sendCode(0); }, 2000);
+  }
+
+  componentWillUnmount() {
+    api.socket.close();
   }
 
   render() {
