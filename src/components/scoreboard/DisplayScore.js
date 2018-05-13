@@ -3,8 +3,7 @@ import TopTenBoard from './TopTen.js'
 import ScoreBoardSocketApi from '../../lib/socket.js'
 import util from '../../lib/util';
 
-// url is temporary, change it to the appropiate websocket link later
-const url = "ws://localhost:9090";
+var url = "";
 // const answers = [0, 2, 1, 2, 1];
 // const api = new ScoreBoardSocketApi(url);
 let api = null;
@@ -25,13 +24,14 @@ class DisplayScore extends React.Component {
     this.state = {
       players: []
     }
-    api = new ScoreBoardSocketApi(url);
-    
+
     fetch('http://localhost:8080/quiz/14')
       .then(function(res) {
         return res.json();
       }).then(function(data) {
         answers = data.questions.map(x => parseInt(x.answer, 10));
+        url = data.url;
+        api = new ScoreBoardSocketApi(url);
       });
   }
 
