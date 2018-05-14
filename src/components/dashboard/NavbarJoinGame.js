@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {setUrl} from "../../redux/actions/ScoreboardActions";
 import store from '../../index'
 
+const quizInfoUrl = 'http://localhost:8080/quizzes/codes/'
 let codeField = "";
 
 class NavbarJoinGame extends React.Component {
@@ -12,7 +13,7 @@ class NavbarJoinGame extends React.Component {
   }
 
   joinGame = () => {
-    fetch('http://localhost:8080/quizzes/codes/' + codeField)
+    fetch(quizInfoUrl + codeField)
       .then(data => {
         return data.json();
       }).then(json => {

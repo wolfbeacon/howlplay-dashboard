@@ -7,6 +7,7 @@ import store from '../../index'
 // const answers = [0, 2, 1, 2, 1];
 // const api = new ScoreBoardSocketApi(url);
 var api = null;
+var getQuizUrlPrefix = 'http://localhost:8080/quiz/';
 
 var users = [];
 var answers = [];
@@ -24,7 +25,7 @@ class DisplayScore extends React.Component {
     }
     let self = this;
 
-    fetch('http://localhost:8080/quiz/14')
+    fetch(getQuizUrlPrefix + store.getState().scoreboard.id)
       .then(function(res) {
         return res.json();
       }).then(function(data) {
