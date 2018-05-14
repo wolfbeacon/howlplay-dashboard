@@ -1,15 +1,13 @@
 const scoreboard_initial_state = {
-  players: []
+  url : "",
+  id : ""
 };
 
 export const ScoreboardReducer = (state=scoreboard_initial_state, action) => {
-  console.log("Now in ScoreboardReducer");
-  console.log(state);
-  console.log(action);
   switch (action.type) {
-    case 'UPDATE_PLAYERS':
-      console.log("Updating players");
-      return action.payload;
+    case 'SET_URL':
+      console.log("Setting url");
+      return {...state, url : action.payload.url, id : action.payload.id}
     default:
       return state;
   }

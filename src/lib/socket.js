@@ -1,5 +1,3 @@
-
-
 class ScoreBoardSocketApi {
   constructor(url) {
     this.socket = new WebSocket(url);
