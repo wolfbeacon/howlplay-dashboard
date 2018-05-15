@@ -1,7 +1,6 @@
-export function updatePlayers(players) {
-  console.log("Now in getPlayers");
+export function setUrl(url) {
   return {
-    type : 'UPDATE_PLAYERS',
-    payload : players
+    type : 'SET_URL',
+    payload : url
   }
 }

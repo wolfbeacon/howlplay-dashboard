@@ -32,6 +32,8 @@ const store = createStore(
     })
 );
 
+export default store;
+
 const history = createHistory();
 
 
