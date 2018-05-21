@@ -11,3 +11,9 @@ export function quizClicked(quizID) {
         quizID: quizID,
     }
 }
+
+export function createQuiz(quizData) {
+    {
+
+    }
+}
