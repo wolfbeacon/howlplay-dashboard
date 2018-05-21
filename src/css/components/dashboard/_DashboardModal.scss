@@ -109,4 +109,8 @@
   width: 100%;
 }
 
+.form-error {
+  border: solid 2px $red !important;
+}
+
 @import "./ModalQuestionItem";
