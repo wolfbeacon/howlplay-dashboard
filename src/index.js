@@ -6,6 +6,7 @@ import {Provider} from 'react-redux';
 import createHistory from 'history/createBrowserHistory';
 import {Route, Switch} from 'react-router';
 import {ConnectedRouter, routerMiddleware, routerReducer} from 'react-router-redux';
+import promiseMiddleware from 'redux-promise';
 
 import DisplayScore from './components/scoreboard/DisplayScore';
 import Login from "./pages/Login";
@@ -30,7 +31,7 @@ export const store = createStore(
         quiz: QuizReducer,
         modal: ModalReducer,
         scoreboard: ScoreboardReducer
-    }), applyMiddleware(routerMiddleware(history))
+    }), applyMiddleware(routerMiddleware(history), promiseMiddleware)
 );
 
 

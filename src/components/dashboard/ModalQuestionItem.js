@@ -42,19 +42,19 @@ const ModalQuestionItem = ({index, formApi}) =>
     <div className={"modal-question-item"}>
         <h3>Question {index}</h3>
         <Text className={`modal-question-question ${showErrorQuizName(index, formApi)}`} placeholder="Question Name"
-              field={"question-name"} asyncValidate={validateNotEmptyAsync}/>
+              field={"title"} asyncValidate={validateNotEmptyAsync}/>
 
         <h4 className={"modal-question-subtitle"}>Options</h4>
         <div className="modal-question-options">
-            <Text field={["answers", 0]} className={showErrorAnswers(0, index, formApi)} placeholder="Choice 1"
+            <Text field={["choices", 0]} className={showErrorAnswers(0, index, formApi)} placeholder="Choice 1"
                   asyncValidate={validateNotEmptyAsync}/>
-            <Text field={["answers", 1]} className={showErrorAnswers(1, index, formApi)} placeholder="Choice 2"
+            <Text field={["choices", 1]} className={showErrorAnswers(1, index, formApi)} placeholder="Choice 2"
                   asyncValidate={validateNotEmptyAsync}/>
         </div>
         <div className="modal-question-options">
-            <Text field={["answers", 2]} className={showErrorAnswers(2, index, formApi)} placeholder="Choice 3"
+            <Text field={["choices", 2]} className={showErrorAnswers(2, index, formApi)} placeholder="Choice 3"
                   asyncValidate={validateNotEmptyAsync}/>
-            <Text field={["answers", 3]} className={showErrorAnswers(3, index, formApi)} placeholder="Choice 4"
+            <Text field={["choices", 3]} className={showErrorAnswers(3, index, formApi)} placeholder="Choice 4"
                   asyncValidate={validateNotEmptyAsync}/>
         </div>
 

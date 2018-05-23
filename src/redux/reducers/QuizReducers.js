@@ -48,6 +48,9 @@ export const QuizReducer = (state=quiz_default_state, action) => {
         case "QUIZ_CLICKED":
             newState.activeQuiz = newState.quizzes[action.quizID];
             break;
+        case "QUIZ_CREATED":
+            console.log(action);
+            break;
         default:
             break;
     }
