@@ -10,7 +10,7 @@ const QuizNavbarItem = ({name, clicked}) =>
 
 
 const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
-    clicked: () => quizClicked(ownProps.id)
+    clicked: () => quizClicked(ownProps.index, ownProps.id)
 }, dispatch);
 
 
