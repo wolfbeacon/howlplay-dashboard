@@ -31,13 +31,17 @@ export const QuizReducer = (state=quiz_default_state, action) => {
     let newState = cloneDeep(state);
     switch (action.type) {
         case "QUIZ_CLICKED":
-            newState.activeQuiz = newState.quizzes[action.quizIndex];
+            if (!action.error) {
+                newState.activeQuiz = action.payload.data;
+            }
             break;
         case "QUIZ_CREATED":
             if (!action.error) {
                 newState.quizzes.push(action.payload.data);
-                newState.activeQuiz = action.payload.data
             }
+            break;
+        case "QUIZ_UPDATED":
+            // for future error handling
             break;
         case "GET_QUIZZES":
             if (!action.error) {

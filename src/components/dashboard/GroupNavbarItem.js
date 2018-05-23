@@ -16,7 +16,7 @@ const GroupNavbarItem = ({name, icon, quizzes, expanded, headerClick, id}) =>
             <FontAwesomeIcon className={"group-navbar-icon group-dropdown-icon"} icon={expanded ? ExpandedIcon : CollapsedIcon} size="lg" />
         </div>
         <div className={"quizzes-group " + ((expanded) ? "quizzes-group quizzes-group-expanded" : "quizzes-group quizzes-group-collapsed")}>
-            {quizzes.map((quiz, i) => <QuizNavbarItem name={quiz.name} index={i} key={i}/>)}
+            {quizzes.map((quiz, i) => <QuizNavbarItem name={quiz.name} id={quiz.id} key={i}/>)}
         </div>
     </div>;
 

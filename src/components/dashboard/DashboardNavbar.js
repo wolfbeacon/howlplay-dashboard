@@ -14,7 +14,7 @@ const DashboardNavbar = ({groups, expanded, toggleModal}) =>
     </div>
     <div id={"dashboard-navbar-controller"}>
         <NavbarJoinGame />
-        <div onClick={toggleModal} id={"dashboard-navbar-addquiz"}>
+        <div onClick={() =>toggleModal()} id={"dashboard-navbar-addquiz"}>
           <h4>New Quiz</h4>
           <FontAwesomeIcon className={"dashboard-navbar-addicon"} icon={faPlus}/>
         </div>

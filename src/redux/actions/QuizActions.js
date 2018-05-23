@@ -17,10 +17,11 @@ export function groupHeaderClicked(id) {
     }
 }
 
-export function quizClicked(quizIndex) {
+export function quizClicked(quizId) {
+    const promise = quizEndpoint.get(`/quiz/${quizId}`);
     return {
         type: 'QUIZ_CLICKED',
-        quizIndex: quizIndex
+        payload: promise
     }
 }
 
@@ -37,6 +38,17 @@ export function getQuizzes(userID) {
     const promise = quizEndpoint.get(`/quizzes/${userID}`);
     return {
         type: "GET_QUIZZES",
+        payload: promise
+    }
+}
+
+export function updateQuiz(quizData) {
+    quizData.owner = "TestUser";
+    const promise = quizEndpoint.patch(`/quiz/${quizData.id}`, quizData, {
+        headers: {'Authorization': "bearer " + "TestUser"}
+    });
+    return {
+        type: "QUIZ_UPDATED",
         payload: promise
     }
 }
