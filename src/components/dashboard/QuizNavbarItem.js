@@ -9,13 +9,9 @@ const QuizNavbarItem = ({name, clicked}) =>
     </div>;
 
 
-const mapStateToProps = (state, ownProps) => ({
-    name: state.quiz.quizzes[ownProps.id].name,
-});
-
 const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
-    clicked: () => quizClicked(ownProps.id)
+    clicked: () => quizClicked(ownProps.index)
 }, dispatch);
 
 
-export default connect(mapStateToProps, mapDispatchToProps) (QuizNavbarItem);
+export default connect(null, mapDispatchToProps) (QuizNavbarItem);

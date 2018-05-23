@@ -26,6 +26,7 @@ const DashboardContentHeader = ({quizName, groupName}) =>
         </div>
         <div id="dashboard-content-controls">
             <button className={"quiz-button"} id={"start-quiz-button"} onClick={(e) => startQuiz(quizName, DEFAULT_ADMIN_KEY)}>Start</button>
+            <button className={"quiz-button"} id={"edit-quiz-button"}>Edit</button>
             <button className={"quiz-button"} id={"delete-quiz-button"}>Delete</button>
         </div>
     </div>;
@@ -33,8 +34,8 @@ const DashboardContentHeader = ({quizName, groupName}) =>
 const mapStateToProps = (state) => {
     let activeQuiz = state.quiz.activeQuiz;
     return ({
-        quizName: (activeQuiz) ? activeQuiz.name : "",
-        groupName: (activeQuiz) ? state.quizGroups[activeQuiz.group].name : "",
+        quizName: (activeQuiz) ? activeQuiz.name : null,
+        groupName: (activeQuiz) ? "Username": null,
     })
 };
 

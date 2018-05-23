@@ -17,10 +17,10 @@ export function groupHeaderClicked(id) {
     }
 }
 
-export function quizClicked(quizID) {
+export function quizClicked(quizIndex) {
     return {
         type: 'QUIZ_CLICKED',
-        quizID: quizID,
+        quizIndex: quizIndex
     }
 }
 
@@ -29,6 +29,14 @@ export function createQuiz(quizData) {
     const promise = quizEndpoint.post('/quiz', quizData);
     return {
         type: "QUIZ_CREATED",
+        payload: promise
+    }
+}
+
+export function getQuizzes(userID) {
+    const promise = quizEndpoint.get(`/quizzes/${userID}`);
+    return {
+        type: "GET_QUIZZES",
         payload: promise
     }
 }

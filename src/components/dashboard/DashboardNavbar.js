@@ -10,7 +10,7 @@ import NavbarJoinGame from "./NavbarJoinGame";
 const DashboardNavbar = ({groups, expanded, toggleModal}) =>
 <div id={`dashboard-navbar`} className={(expanded) ? "dashboard-nav-expanded" : "dashboard-nav-collapsed"} >
     <div id={"dashboard-navbar-items"}>
-        {groups.map(groupID => <GroupNavbarItem id={groupID} key={groupID}/>)}
+        <GroupNavbarItem id={"user"} />
     </div>
     <div id={"dashboard-navbar-controller"}>
         <NavbarJoinGame />
