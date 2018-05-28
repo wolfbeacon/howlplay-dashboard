@@ -1,7 +1,8 @@
 import React from 'react';
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
-import EditableLabel from "../EditableLabel";
+import {toggleModal} from "../../redux/actions/ModalActions";
+import {deleteQuiz} from "../../redux/actions/QuizActions";
 
 const url = 'http://localhost:8080/spinup';
 const DEFAULT_ADMIN_KEY = "HelloWorld";
@@ -18,28 +19,31 @@ function startQuiz(quiz_details, admin_key) {
   })
 }
 
-const DashboardContentHeader = ({quizName, groupName}) =>
+const DashboardContentHeader = ({quiz, quizName, groupName, toggleModal, deleteQuiz}) =>
     <div id={"dashboard-content-header"} style={{display: `${(groupName) ? 'flex': 'none'}`}}>
         <div className={"dashboard-content-labels"}>
-            <EditableLabel text={quizName} className={"edit-label"} labelClassName={"edit-label quiz-name-edit-label"}/>
-            <EditableLabel text={groupName} className={"group-editable edit-label"} labelClassName={"edit-label group-name-edit-label"}/>
+            <h1 className={"edit-label"}>{quizName}</h1>
+            <h3 className={"group-editable edit-label"}>{groupName}</h3>
         </div>
         <div id="dashboard-content-controls">
             <button className={"quiz-button"} id={"start-quiz-button"} onClick={(e) => startQuiz(quizName, DEFAULT_ADMIN_KEY)}>Start</button>
-            <button className={"quiz-button"} id={"delete-quiz-button"}>Delete</button>
+            <button className={"quiz-button"} id={"edit-quiz-button"} onClick={(e) => toggleModal(true, quiz)}>Edit</button>
+            <button className={"quiz-button"} id={"delete-quiz-button"} onClick={(e) => deleteQuiz(quiz)}>Delete</button>
         </div>
     </div>;
 
 const mapStateToProps = (state) => {
     let activeQuiz = state.quiz.activeQuiz;
     return ({
-        quizName: (activeQuiz) ? activeQuiz.name : "",
-        groupName: (activeQuiz) ? state.quizGroups[activeQuiz.group].name : "",
+        quiz: activeQuiz,
+        quizName: (activeQuiz) ? activeQuiz.name : null,
+        groupName: (activeQuiz) ? "Test User": null,
     })
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-
+    toggleModal,
+    deleteQuiz
 }, dispatch);
 
 

@@ -12,7 +12,7 @@ const mapStateToProps = (state) => {
     let activeQuiz = state.quiz.activeQuiz;
     return ({
         quizName: (activeQuiz) ? activeQuiz.name : "",
-        groupName: (activeQuiz) ? state.quizGroups[activeQuiz.group].name : "",
+        groupName: "UserName",
     })
 };
 

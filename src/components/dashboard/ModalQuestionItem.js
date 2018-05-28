@@ -1,31 +1,65 @@
-import React, {Component} from "react";
+import React from "react";
+import {Select, Text} from "react-form";
+import _ from 'lodash';
+import {validateNotEmptyAsync} from "./DashboardModal";
 
-class ModalQuestionItem extends Component {
-  render() {
-    return (<div className={"modal-question-item"}>
-      <h3>Question {this.props.index}</h3>
-      <input id={"question-1"} className={"modal-question-question"} type="text" placeholder="Question"/>
+const showErrorQuizName = (questionIndex, formAPI) => {
+    if (_.get(formAPI.touched, `questions[${questionIndex - 1}].question-name`)
+        && _.get(formAPI.validationFailed, `questions[${questionIndex - 1}].question-name`)) {
+        return "form-error";
+    }
+    return "";
+};
 
-      <h4 className={"modal-question-subtitle"}>Options</h4>
-      <div className="modal-question-options">
-        <input id={"option-" + this.props.index + "-1"} type="text" placeholder="Choice 1"/>
-        <input id={"option-" + this.props.index + "-2"} type="text" placeholder="Choice 2"/>
-      </div>
-      <div className="modal-question-options">
-        <input id={"option-" + this.props.index + "-3"} type="text" placeholder="Choice 3"/>
-        <input id={"option-" + this.props.index + "-4"} type="text" placeholder="Choice 4"/>
-      </div>
+const showErrorAnswers = (index, questionIndex, formAPI) => {
+    if (_.get(formAPI.touched, `questions[${questionIndex - 1}].answers[${index}]`)
+        && _.get(formAPI.validationFailed, `questions[${questionIndex - 1}].answers[${index}]`)) {
+        return "form-error";
+    }
+    return "";
+};
 
-      <h4 className={"modal-question-subtitle"}>Answer</h4>
-      <select className={"modal-question-answer"} id={"question-" + this.props.index + "-answer"}>
-        <option value='' selected disabled>Select an Answer</option>
-        <option value='1'>Choice 1</option>
-        <option value='2'>Choice 2</option>
-        <option value='3'>Choice 3</option>
-        <option value='4'>Choice 4</option>
-      </select>
-    </div>);
-  }
-}
+const Answers = [
+    {
+        label: 'Option One',
+        value: 0,
+    },
+    {
+        label: 'Option Two',
+        value: 1,
+    },
+    {
+        label: "Option Three",
+        value: 2,
+    },
+    {
+        label: "Option Four",
+        value: 3,
+    },
+];
+
+const ModalQuestionItem = ({index, formApi}) =>
+    <div className={"modal-question-item"}>
+        <h3>Question {index}</h3>
+        <Text className={`modal-question-question ${showErrorQuizName(index, formApi)}`} placeholder="Question Name"
+              field={"title"} asyncValidate={validateNotEmptyAsync}/>
+
+        <h4 className={"modal-question-subtitle"}>Options</h4>
+        <div className="modal-question-options">
+            <Text field={["choices", 0]} className={showErrorAnswers(0, index, formApi)} placeholder="Choice 1"
+                  asyncValidate={validateNotEmptyAsync}/>
+            <Text field={["choices", 1]} className={showErrorAnswers(1, index, formApi)} placeholder="Choice 2"
+                  asyncValidate={validateNotEmptyAsync}/>
+        </div>
+        <div className="modal-question-options">
+            <Text field={["choices", 2]} className={showErrorAnswers(2, index, formApi)} placeholder="Choice 3"
+                  asyncValidate={validateNotEmptyAsync}/>
+            <Text field={["choices", 3]} className={showErrorAnswers(3, index, formApi)} placeholder="Choice 4"
+                  asyncValidate={validateNotEmptyAsync}/>
+        </div>
+
+        <h4 className={"modal-question-subtitle"}>Answer</h4>
+        <Select options={Answers} field={"answer"} className={"modal-question-answer"}/>
+    </div>;
 
 export default ModalQuestionItem;

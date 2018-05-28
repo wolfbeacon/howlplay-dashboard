@@ -2,7 +2,7 @@ import React from 'react';
 import TopTenBoard from './TopTen.js'
 import ScoreBoardSocketApi from '../../lib/socket.js'
 import util from '../../lib/util';
-import store from '../../index'
+import {store} from '../../index'
 
 // const answers = [0, 2, 1, 2, 1];
 // const api = new ScoreBoardSocketApi(url);

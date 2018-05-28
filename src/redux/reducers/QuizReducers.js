@@ -1,17 +1,11 @@
 import cloneDeep from "lodash/cloneDeep";
 
 const group_default_state = {
-    "abc" : {
+    "user" : {
         expanded: false,
         name: "Hackathon1",
         icon: "/icons/A.jpg",
         quizzes: ["q123"]
-    },
-    "123" : {
-        expanded: false,
-        name: "Hackathon2",
-        icon: "/icons/Fox.jpg",
-        quizzes: ["qabc"]
     }
 };
 
@@ -30,23 +24,41 @@ export const GroupReducer = (state=group_default_state, action) => {
 
 const quiz_default_state = {
     activeQuiz: null,
-    quizzes: {
-        "q123": {
-            name: "TestQuiz1",
-            group: "abc"
-        },
-        "qabc": {
-            name: "TestQuiz2",
-            group: "123"
-        }
-    }
+    activeQuizIndex: null,
+    quizzes: []
 };
 
 export const QuizReducer = (state=quiz_default_state, action) => {
     let newState = cloneDeep(state);
     switch (action.type) {
         case "QUIZ_CLICKED":
-            newState.activeQuiz = newState.quizzes[action.quizID];
+            if (!action.error) {
+                newState.activeQuiz = action.payload.data;
+                newState.activeQuizIndex = action.meta.index;
+                console.log(newState.activeQuizIndex);
+            }
+            break;
+        case "QUIZ_CREATED":
+            if (!action.error) {
+                newState.quizzes.push(action.payload.data);
+            }
+            break;
+        case "QUIZ_UPDATED":
+            // for future error handling
+            break;
+        case "QUIZ_DELETED":
+            if (!action.error) {
+                if (newState.activeQuizIndex) {
+                    newState.quizzes.pop(newState.activeQuizIndex);
+                }
+                newState.activeQuiz = null;
+                newState.activeQuizIndex = null;
+            }
+            break;
+        case "GET_QUIZZES":
+            if (!action.error) {
+                newState.quizzes = action.payload.data
+            }
             break;
         default:
             break;

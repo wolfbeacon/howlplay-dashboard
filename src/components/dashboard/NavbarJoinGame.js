@@ -2,9 +2,9 @@ import React from "react";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import {setUrl} from "../../redux/actions/ScoreboardActions";
-import store from '../../index'
+import {store} from '../../index'
 
-const quizInfoUrl = 'http://localhost:8080/quizzes/codes/'
+const quizInfoUrl = 'http://localhost:8080/quizzes/codes/';
 let codeField = "";
 
 class NavbarJoinGame extends React.Component {
@@ -27,12 +27,12 @@ class NavbarJoinGame extends React.Component {
       }).catch(err => {
         console.log("Error when joining game");
       });
-  }
+  };
 
   render() {
     return (
       <div id="code-prompt">
-        <input id="code-input" onChange={(e) => this.handleChange(e)} placeholder="Enter a Game Code"></input>
+        <input id="code-input" onChange={(e) => this.handleChange(e)} placeholder="Enter a Game Code"/>
         <button id="code-btn" onClick={this.joinGame}>Open Game</button>
       </div>
     );

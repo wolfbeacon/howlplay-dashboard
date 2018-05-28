@@ -66,6 +66,7 @@
 }
 
 #dashboard-modal-close {
+  cursor: pointer;
   color: white;
   margin-right: 0;
   margin-left: auto;
@@ -107,6 +108,10 @@
   background-color: rgba(0,0,0,0.7);
   height: 100%;
   width: 100%;
+}
+
+.form-error {
+  border: solid 2px $red !important;
 }
 
 @import "./ModalQuestionItem";

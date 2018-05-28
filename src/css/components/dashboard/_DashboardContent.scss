@@ -47,9 +47,13 @@
   background-color: $primary;
 }
 
-
 #delete-quiz-button {
   background-color: $red;
+}
+
+#edit-quiz-button {
+  margin-right: 10px;
+  background-color: #8f4978;
 }
 
 @include tablet {
@@ -59,5 +63,9 @@
 
   #delete-quiz-button:hover {
     background-color: $red-dark;
+  }
+
+  #edit-quiz-button:hover {
+    background-color: #773862;
   }
 }

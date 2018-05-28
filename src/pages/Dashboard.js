@@ -3,16 +3,32 @@ import DashboardHeader from "../components/dashboard/DashboardHeader";
 import DashboardNavbar from "../components/dashboard/DashboardNavbar";
 import DashboardContent from "../components/dashboard/DashboardContent";
 import DashboardModal from "../components/dashboard/DashboardModal";
+import {bindActionCreators} from "redux";
+import {getQuizzes} from "../redux/actions/QuizActions";
+import {connect} from "react-redux";
 
-const Dashboard = () =>
-    <div id={"dashboard"}>
-        <DashboardHeader/>
-        <div id="dashboard-body">
-          <DashboardNavbar/>
-          <DashboardContent/>
-        </div>
-        <DashboardModal/>
-    </div>;
+class Dashboard extends React.Component {
+    componentWillMount() {
+        this.props.getQuizzes("TestUser");
+    }
+
+    render() {
+        return (
+            <div id={"dashboard"}>
+                <DashboardHeader/>
+                <div id="dashboard-body">
+                    <DashboardNavbar/>
+                    <DashboardContent/>
+                </div>
+                <DashboardModal/>
+            </div>
+        );
+    }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
+    getQuizzes
+}, dispatch);
 
 
-export default Dashboard;
+export default connect(null, mapDispatchToProps) (Dashboard);
