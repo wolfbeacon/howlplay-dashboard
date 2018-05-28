@@ -9,7 +9,7 @@ import {connect} from "react-redux";
 
 class Dashboard extends React.Component {
     componentWillMount() {
-        this.props.getQuizzes("TestUser");
+        this.props.getQuizzes(this.props.quizToken);
     }
 
     render() {
@@ -30,5 +30,11 @@ const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
     getQuizzes
 }, dispatch);
 
+function mapStateToProps(state, ownProps) {
+    return {
+        quizToken: state.dashboard.quizToken
+    };
+}
 
-export default connect(null, mapDispatchToProps) (Dashboard);
+
+export default connect(mapStateToProps, mapDispatchToProps) (Dashboard);

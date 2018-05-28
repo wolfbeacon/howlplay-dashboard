@@ -5,8 +5,9 @@ import {createStore, combineReducers, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import createHistory from 'history/createBrowserHistory';
 import {Route, Switch} from 'react-router';
-import {ConnectedRouter, routerMiddleware, routerReducer} from 'react-router-redux';
+import {routerMiddleware, routerReducer} from 'react-router-redux';
 import promiseMiddleware from 'redux-promise';
+import {HashRouter} from "react-router-dom"
 
 import DisplayScore from './components/scoreboard/DisplayScore';
 import Login from "./pages/Login";
@@ -14,7 +15,7 @@ import NotFound from "./pages/404";
 
 import './css/main.scss';
 
-import {DashboardNavbarReducer} from "./redux/reducers/DashboardReducers";
+import {DashboardNavbarReducer, DashboardReducer} from "./redux/reducers/DashboardReducers";
 import {GroupReducer, QuizReducer} from "./redux/reducers/QuizReducers";
 import {ModalReducer} from "./redux/reducers/ModalReducers";
 import {ScoreboardReducer} from "./redux/reducers/ScoreboardReducers";
@@ -27,6 +28,7 @@ export const store = createStore(
     combineReducers({
         routing: routerReducer,
         dashboardNavbar: DashboardNavbarReducer,
+        dashboard: DashboardReducer,
         quizGroups: GroupReducer,
         quiz: QuizReducer,
         modal: ModalReducer,
@@ -38,13 +40,13 @@ export const store = createStore(
 
 ReactDOM.render(
     <Provider store={store}>
-        <ConnectedRouter history={history}>
+        <HashRouter history={history}>
             <Switch>
                 <Route exact path="/displayscore" component={DisplayScore}/>
                 <Route exact path="/" component={Login}/>
                 <Route exact path="/dashboard" component={Dashboard}/>
                 <Route component={NotFound}/> {/*404 Route*/}
             </Switch>
-        </ConnectedRouter>
+        </HashRouter>
     </Provider> , document.getElementById('root'));
 registerServiceWorker();

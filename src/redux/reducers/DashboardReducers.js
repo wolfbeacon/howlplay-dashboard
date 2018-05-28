@@ -16,3 +16,15 @@ export const DashboardNavbarReducer = (state=navbar_default_state, action) => {
     }
     return newState;
 };
+
+export const DashboardReducer = (state, action) => {
+    let newState = { ...state };
+    switch (action.type){
+        case "SET_QUIZ_TOKEN":
+            newState = { ...state, quizToken: action.payload };
+            break;
+        default:
+            break;
+    }
+    return newState;
+};
