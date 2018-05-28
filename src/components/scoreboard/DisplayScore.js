@@ -4,12 +4,12 @@ import ScoreBoardSocketApi from '../../lib/socket.js'
 import util from '../../lib/util';
 import {store} from '../../index'
 import axios from 'axios';
-import {DEFAULT_QUIZ_TOKEN, DEFAULT_WEBSOCKET_URL} from "../../configurations";
+import {DEFAULT_QUIZ_TOKEN, DEFAULT_WEBSOCKET_URL, DEFAULT_API_URL} from "../../configurations";
 
 // const answers = [0, 2, 1, 2, 1];
 // const api = new ScoreBoardSocketApi(url);
 let api = null;
-let getQuizUrlPrefix = 'http://localhost:8080/quizzes/';
+let getQuizUrlPrefix = DEFAULT_API_URL + '/quizzes/';
 
 let users = [];
 let answers = [];
