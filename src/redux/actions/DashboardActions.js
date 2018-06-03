@@ -3,6 +3,8 @@ import axios from 'axios/index';
 
 const MAIN_URL = "http://localhost:8080/quizzes/";
 
+import {DEFAULT_API_URL} from "../../configurations";
+
 export function toggleNavbar() {
     return {
         type: 'TOGGLE_NAVBAR',
