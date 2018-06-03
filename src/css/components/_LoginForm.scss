@@ -84,6 +84,14 @@
 }
 
 
+.login-error {
+  display: block;
+  color: $red;
+  font-weight: bold;
+  padding-top: 4px;
+  font-size: 0.72rem;
+}
+
 @keyframes fade-in {
   from {opacity: 0; top: -140px;}
   to {opacity: 1; top: 0;}

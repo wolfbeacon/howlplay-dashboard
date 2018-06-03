@@ -7,7 +7,8 @@ import createHistory from 'history/createBrowserHistory';
 import {Route, Switch} from 'react-router';
 import {routerMiddleware, routerReducer} from 'react-router-redux';
 import promiseMiddleware from 'redux-promise';
-import {HashRouter} from "react-router-dom"
+import {HashRouter} from "react-router-dom";
+import thunk from "redux-thunk";
 
 import DisplayScore from './components/scoreboard/DisplayScore';
 import Login from "./pages/Login";
@@ -33,7 +34,7 @@ export const store = createStore(
         quiz: QuizReducer,
         modal: ModalReducer,
         scoreboard: ScoreboardReducer
-    }), applyMiddleware(routerMiddleware(history), promiseMiddleware)
+    }), applyMiddleware(thunk, routerMiddleware(history), promiseMiddleware)
 );
 
 

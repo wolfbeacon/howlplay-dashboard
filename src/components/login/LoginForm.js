@@ -4,6 +4,7 @@ import StyledTitle from "../StyledTitle";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import {setQuizToken} from "../../redux/actions/DashboardActions";
+import {withRouter} from 'react-router-dom';
 
 class LoginForm extends Component {
 
@@ -23,7 +24,6 @@ class LoginForm extends Component {
 
     onLogin = () => {
         this.props.setQuizToken(this.state.token);
-        
     };
 
     render() {
@@ -37,6 +37,7 @@ class LoginForm extends Component {
                   <div className="login-input-section">
                       <label className="login-form-label sr-only" htmlFor="access-key-input">Access Key</label>
                       <input type="text" className="login-input" onChange={this.onTokenInput} id="access-key-input" placeholder="Access Key"/>
+                      {this.props.error ? <label className="login-error">{this.props.error}</label>: null}
                   </div>
                 </div>
               </div>
@@ -49,9 +50,11 @@ class LoginForm extends Component {
     }
 }
 
+const mapStateToProps = state => ({error: state.dashboard.error});
+
 const mapDispatchToProps = (dispatch) => bindActionCreators({
     setQuizToken
 }, dispatch);
 
 
-export default connect(null, mapDispatchToProps) (LoginForm);
+export default connect(mapStateToProps, mapDispatchToProps) (withRouter(LoginForm));

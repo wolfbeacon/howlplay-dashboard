@@ -5,7 +5,7 @@ class Login extends Component {
     render() {
         return (
           <header className="page" id="login">
-            <LoginForm/>
+            <LoginForm onSwithToGame={() => {}}/>
           </header>
         );
     }

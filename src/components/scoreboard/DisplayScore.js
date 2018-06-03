@@ -2,8 +2,6 @@ import React from 'react';
 import TopTenBoard from './TopTen.js'
 import ScoreBoardSocketApi from '../../lib/socket.js'
 import util from '../../lib/util';
-import {store} from '../../index'
-import axios from 'axios';
 import {DEFAULT_QUIZ_TOKEN, DEFAULT_WEBSOCKET_URL, DEFAULT_API_URL} from "../../configurations";
 
 // const answers = [0, 2, 1, 2, 1];
