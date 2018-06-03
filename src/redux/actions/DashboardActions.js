@@ -1,8 +1,6 @@
 import {push} from 'react-router-redux';
 import axios from 'axios/index';
 
-const MAIN_URL = "http://localhost:8080/quizzes/";
-
 import {DEFAULT_API_URL} from "../../configurations";
 
 export function toggleNavbar() {
@@ -13,7 +11,7 @@ export function toggleNavbar() {
 
 export function setQuizToken(token) {
     return dispatch => {
-      axios.get(MAIN_URL + token).then((data) => {
+      axios.get(DEFAULT_API_URL + token).then((data) => {
         if (data.data.length === 0) {
           dispatch({
             type: 'BAD_QUIZ_TOKEN'
