@@ -11,6 +11,7 @@ let getQuizUrlPrefix = DEFAULT_API_URL + '/quizzes/';
 
 let users = [];
 let answers = [];
+let startTime = null;
 
 function getCode(buf) {
     let dataView = new Uint8Array(buf);
@@ -21,7 +22,8 @@ class DisplayScore extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            players: []
+            players: [],
+            runtime: null
         };
         let self = this;
 
@@ -40,12 +42,17 @@ class DisplayScore extends React.Component {
 
                 api.socket.onopen = () => {
                     console.log("Opening socket");
-                    api.socket.sendCode(14);
+                    api.socket.sendCode(15);
+                    setInterval(() => { api.socket.sendCode(14) }, 1000);
                 };
 
                 api.socket.onmessage = (e) => {
                     let code = getCode(e.data);
-                    if (code === 14) {
+                    switch(code) {
+                      case 0:
+                        api.socket.sendCode(0);
+                        break;
+                      case 14:
                         let data = new Uint8Array(e.data);
                         users = JSON.parse(util.arrayBufferToString(data.slice(1))).slice(0, 10);
                         console.log(users);
@@ -61,30 +68,35 @@ class DisplayScore extends React.Component {
                         });
                         self.setState({players: users});
                         // this.setState({players: ["Test", "Test1"]});
+                        break;
+                      case 15:
+                        console.log("HAMMER TIME");
+                        startTime = new Date(util.arrayBufferToString(e.data.slice(1)));
+
+                        // Assume people would have this run for longer than a month...
+                        let now = new Date();
+                        let d_diff = (now.getDate() - startTime.getDate()) * 86400;
+                        let h_diff = (now.getHours() - startTime.getHours()) * 3600;
+                        let m_diff = (now.getMinutes() - startTime.getMinutes()) * 60;
+                        self.state.runtime = d_diff + h_diff + m_diff + (now.getSeconds() - startTime.getSeconds());
+
+                        setInterval(() => {
+                          self.state.runtime += 1;
+                        }, 1000);
+                        break;
+                      default:
+                        console.log(code + " - NANI?!?!");
+                        break;
                     }
                 };
-
-                setInterval(() => {
-                    api.socket.sendCode(14);
-                }, 1000);
-                setInterval(() => {
-                    api.socket.sendCode(0);
-                }, 2000);
-            }).catch(e => {
-                console.log(e);
-            });
+            }).catch(e => { console.log(e) });
     }
 
-
     componentWillUnmount() {
-        if (api) {
-            api.socket.close();
-        }
-
+        if (api) { api.socket.close() }
     }
 
     render() {
-        // remove this later. Only meant for preventing Travis errors
         return (
             <div id="scoreboard">
                 <div className="display-score-screen">
@@ -92,7 +104,9 @@ class DisplayScore extends React.Component {
                         <TopTenBoard users={users}/>
                     </div>
                     <div className="display-card">
-                        <h2 className="time-left">Time Left <span id="timer-time">0:10</span></h2>
+                        <h2 className="time-left">Time Left: <span id="timer-time">
+                          { this.state.runtime? (this.state.runtime - (this.state.runtime % 60)) / 60 + ":" + ("0" + this.state.runtime % 60).slice(-2) : "..." }
+                        </span></h2>
                         <h3 className="active-users">Active Users: <span id="users-count">{users.length}</span></h3>
                         <div>Current users
                             <div>{this.state.players.map((player) => {
@@ -104,14 +118,6 @@ class DisplayScore extends React.Component {
                     </div>
                 </div>
             </div>
-            // <div className="display-score-screen">
-            //   <TopTenBoard users={users} serverlink={server} />
-            //   <CountdownTimer />
-            //   <div className="active-users">Active Users: 99999</div>
-            //   <div id="player-list">Current Players
-            //     <div>{this.state.players}</div>
-            //   </div>
-            //   <StopGameButton />
         );
     }
 }
