@@ -22,6 +22,7 @@ export function setQuizToken(token) {
             payload: token
           });
           dispatch(push('#/dashboard'));
+          window.location.reload();
         }
       }, (err) => {
         dispatch({
