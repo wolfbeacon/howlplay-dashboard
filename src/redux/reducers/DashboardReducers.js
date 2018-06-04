@@ -27,7 +27,6 @@ export const DashboardReducer = (state=login_default_state, action) => {
     let newState = { ...state };
     switch (action.type){
         case "SET_QUIZ_TOKEN":
-            console.log("yeet");
             newState = { ...state, quizToken: action.payload };
             push('/dashboard');
             break;

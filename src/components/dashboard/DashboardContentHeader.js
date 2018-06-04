@@ -15,7 +15,7 @@ function startQuiz(quiz_details, admin_key) {
     method: 'POST',
     body: JSON.stringify(data)
   }).then(data => {
-    console.log("Done")
+    console.log("Done");
   })
 }
 
