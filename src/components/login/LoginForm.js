@@ -16,13 +16,16 @@ class LoginForm extends Component {
     }
 
     onTokenInput = (e) => {
-        console.log(this.state);
         this.setState({
             token: e.target.value
-        })
+        });
+
     };
 
-    onLogin = () => {
+    onLogin = (e) => {
+      console.log(this.state);
+      console.log(e);
+      e.preventDefault();
         this.props.setQuizToken(this.state.token);
     };
 
@@ -43,7 +46,7 @@ class LoginForm extends Component {
               </div>
               <div id="login-error-container">
                   <p id="login-error-area">Something went wrong! Please try again.</p>
-                  <button id="login-submit-button" onClick={this.onLogin}>Login</button>
+                  <button id="login-submit-button" onClick={(e) => this.onLogin(e)}>Login</button>
               </div>
             </form>
         );
