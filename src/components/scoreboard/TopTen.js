@@ -11,7 +11,7 @@ class TopTenBoard extends React.Component {
           {
             this.props.users.length !== 0 ?
             this.props.users.map((item, index) => {
-              return <Row position={index+1} username={item.nickname} score={item.score}/>
+              return <Row key={index} position={index+1} username={item.nickname} score={item.score}/>
             }) :
             <h2 className="toptenboard-lonely">Howplay is lonely...   :,(</h2>
           }

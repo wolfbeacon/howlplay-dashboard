@@ -2,12 +2,12 @@ import React from 'react';
 import TopTenBoard from './TopTen.js'
 import ScoreBoardSocketApi from '../../lib/socket.js'
 import util from '../../lib/util';
+import {store} from '../../index'
 import {DEFAULT_QUIZ_TOKEN, DEFAULT_WEBSOCKET_URL, DEFAULT_API_URL} from "../../configurations";
 
 // const answers = [0, 2, 1, 2, 1];
-const api = new ScoreBoardSocketApi(DEFAULT_WEBSOCKET_URL);
 let getQuizUrlPrefix = DEFAULT_API_URL + '/quizzes/';
-
+let api = null;
 let users = [];
 let answers = [];
 let startTime = null;
@@ -36,14 +36,17 @@ class DisplayScore extends React.Component {
                 return res.json();
             }).then(function (data) {
                 let quiz = data[0];
+                console.log(store.getState());
+                api = new ScoreBoardSocketApi(DEFAULT_WEBSOCKET_URL);
+                // api = new ScoreBoardSocketApi(store.getState().scoreboard.url);
+
                 quiz.questions = JSON.parse(quiz.questions);
                 answers = quiz.questions.map(x => parseInt(x.answer, 10));
 
                 api.socket.onopen = () => {
-                    console.log("Opening socket");
-                    api.socket.sendCode(15);
-                    setInterval(() => { api.socket.sendCode(14) }, 1000);
-                };
+                  api.socket.sendCode(15);
+                  setInterval(() => { api.socket.sendCode(14) }, 1000);
+                }
 
                 api.socket.onmessage = (e) => {
                     let code = getCode(e.data);
@@ -54,7 +57,6 @@ class DisplayScore extends React.Component {
                       case 14:
                         let data = new Uint8Array(e.data);
                         users = JSON.parse(util.arrayBufferToString(data.slice(1))).slice(0, 10);
-                        console.log(users);
                         users.map((user) => {
                             user.score = 0;
                             return user.answers.map((answer, index) => {
@@ -89,6 +91,7 @@ class DisplayScore extends React.Component {
                     }
                 };
             }).catch(e => { console.log(e) });
+
     }
 
     componentWillUnmount() {
@@ -118,8 +121,8 @@ class DisplayScore extends React.Component {
                         </span></h2>
                         <h3 className="active-users">Active Users: <span id="users-count">{users.length}</span></h3>
                         <div>Current users
-                            <div>{this.state.players.map((player) => {
-                                return <h4>{player.nickname}</h4>
+                            <div>{this.state.players.map((player, key) => {
+                                return <h4 key={key}>{player.nickname}</h4>
                             })}
                             </div>
                         </div>
