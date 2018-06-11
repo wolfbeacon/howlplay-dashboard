@@ -1,10 +1,11 @@
 import React from "react";
 import {bindActionCreators} from "redux";
+import { DEFAULT_API_URL } from '../../configurations';
 import {connect} from "react-redux";
 import {setUrl} from "../../redux/actions/ScoreboardActions";
 import {store} from '../../index'
 
-const quizInfoUrl = 'http://localhost:8080/quizzes/codes/';
+const quizInfoUrl = DEFAULT_API_URL + '/quizzes/codes/';
 let codeField = "";
 
 class NavbarJoinGame extends React.Component {

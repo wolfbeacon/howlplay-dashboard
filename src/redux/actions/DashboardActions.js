@@ -1,7 +1,8 @@
 import {push} from 'react-router-redux';
+import { DEFAULT_API_URL } from '../../configurations';
 import axios from 'axios/index';
 
-const MAIN_URL = "http://localhost:8080/quizzes/";
+const MAIN_URL = DEFAULT_API_URL + "/quizzes/";
 
 export function toggleNavbar() {
     return {

@@ -5,13 +5,13 @@ import util from '../../lib/util';
 import {DEFAULT_QUIZ_TOKEN, DEFAULT_WEBSOCKET_URL, DEFAULT_API_URL} from "../../configurations";
 
 // const answers = [0, 2, 1, 2, 1];
-// const api = new ScoreBoardSocketApi(url);
-let api = null;
+const api = new ScoreBoardSocketApi(DEFAULT_WEBSOCKET_URL);
 let getQuizUrlPrefix = DEFAULT_API_URL + '/quizzes/';
 
 let users = [];
 let answers = [];
 let startTime = null;
+let timer = null;
 
 function getCode(buf) {
     let dataView = new Uint8Array(buf);
@@ -23,9 +23,11 @@ class DisplayScore extends React.Component {
         super(props);
         this.state = {
             players: [],
+            ended: false,
             runtime: null
         };
         let self = this;
+        this.endGame = this.endGame.bind(self);
 
 
         fetch(getQuizUrlPrefix + DEFAULT_QUIZ_TOKEN)
@@ -36,9 +38,6 @@ class DisplayScore extends React.Component {
                 let quiz = data[0];
                 quiz.questions = JSON.parse(quiz.questions);
                 answers = quiz.questions.map(x => parseInt(x.answer, 10));
-                // let url = store.getState().scoreboard.url;
-                let url = DEFAULT_WEBSOCKET_URL;
-                api = new ScoreBoardSocketApi(url);
 
                 api.socket.onopen = () => {
                     console.log("Opening socket");
@@ -80,7 +79,7 @@ class DisplayScore extends React.Component {
                         let m_diff = (now.getMinutes() - startTime.getMinutes()) * 60;
                         self.state.runtime = d_diff + h_diff + m_diff + (now.getSeconds() - startTime.getSeconds());
 
-                        setInterval(() => {
+                        timer = setInterval(() => {
                           self.state.runtime += 1;
                         }, 1000);
                         break;
@@ -94,6 +93,16 @@ class DisplayScore extends React.Component {
 
     componentWillUnmount() {
         if (api) { api.socket.close() }
+    }
+
+    endGame() {
+      if (!this.state.ended) {
+        window.clearInterval(timer);
+        api.socket.sendCode(13);
+        this.setState({ended: true});
+      } else {
+        window.history.back();
+      }
     }
 
     render() {
@@ -114,7 +123,7 @@ class DisplayScore extends React.Component {
                             })}
                             </div>
                         </div>
-                        <button id="btn-stop-game">End Game</button>
+                        <button id="btn-stop-game" onClick={this.endGame}>{ this.state.ended? "Exit" : "End Game"}</button>
                     </div>
                 </div>
             </div>
