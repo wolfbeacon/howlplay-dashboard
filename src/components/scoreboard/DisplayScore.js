@@ -2,16 +2,16 @@ import React from 'react';
 import TopTenBoard from './TopTen.js'
 import ScoreBoardSocketApi from '../../lib/socket.js'
 import util from '../../lib/util';
+import {store} from '../../index'
 import {DEFAULT_QUIZ_TOKEN, DEFAULT_WEBSOCKET_URL, DEFAULT_API_URL} from "../../configurations";
 
 // const answers = [0, 2, 1, 2, 1];
-// const api = new ScoreBoardSocketApi(url);
-let api = null;
 let getQuizUrlPrefix = DEFAULT_API_URL + '/quizzes/';
-
+let api = null;
 let users = [];
 let answers = [];
 let startTime = null;
+let timer = null;
 
 function getCode(buf) {
     let dataView = new Uint8Array(buf);
@@ -23,9 +23,11 @@ class DisplayScore extends React.Component {
         super(props);
         this.state = {
             players: [],
+            ended: false,
             runtime: null
         };
         let self = this;
+        this.endGame = this.endGame.bind(self);
 
 
         fetch(getQuizUrlPrefix + DEFAULT_QUIZ_TOKEN)
@@ -34,17 +36,17 @@ class DisplayScore extends React.Component {
                 return res.json();
             }).then(function (data) {
                 let quiz = data[0];
+                console.log(store.getState());
+                api = new ScoreBoardSocketApi(DEFAULT_WEBSOCKET_URL);
+                // api = new ScoreBoardSocketApi(store.getState().scoreboard.url);
+
                 quiz.questions = JSON.parse(quiz.questions);
                 answers = quiz.questions.map(x => parseInt(x.answer, 10));
-                // let url = store.getState().scoreboard.url;
-                let url = DEFAULT_WEBSOCKET_URL;
-                api = new ScoreBoardSocketApi(url);
 
                 api.socket.onopen = () => {
-                    console.log("Opening socket");
-                    api.socket.sendCode(15);
-                    setInterval(() => { api.socket.sendCode(14) }, 1000);
-                };
+                  api.socket.sendCode(15);
+                  setInterval(() => { api.socket.sendCode(14) }, 1000);
+                }
 
                 api.socket.onmessage = (e) => {
                     let code = getCode(e.data);
@@ -55,7 +57,6 @@ class DisplayScore extends React.Component {
                       case 14:
                         let data = new Uint8Array(e.data);
                         users = JSON.parse(util.arrayBufferToString(data.slice(1))).slice(0, 10);
-                        console.log(users);
                         users.map((user) => {
                             user.score = 0;
                             return user.answers.map((answer, index) => {
@@ -80,7 +81,7 @@ class DisplayScore extends React.Component {
                         let m_diff = (now.getMinutes() - startTime.getMinutes()) * 60;
                         self.state.runtime = d_diff + h_diff + m_diff + (now.getSeconds() - startTime.getSeconds());
 
-                        setInterval(() => {
+                        timer = setInterval(() => {
                           self.state.runtime += 1;
                         }, 1000);
                         break;
@@ -90,10 +91,21 @@ class DisplayScore extends React.Component {
                     }
                 };
             }).catch(e => { console.log(e) });
+
     }
 
     componentWillUnmount() {
         if (api) { api.socket.close() }
+    }
+
+    endGame() {
+      if (!this.state.ended) {
+        window.clearInterval(timer);
+        api.socket.sendCode(13);
+        this.setState({ended: true});
+      } else {
+        window.history.back();
+      }
     }
 
     render() {
@@ -109,12 +121,12 @@ class DisplayScore extends React.Component {
                         </span></h2>
                         <h3 className="active-users">Active Users: <span id="users-count">{users.length}</span></h3>
                         <div>Current users
-                            <div>{this.state.players.map((player) => {
-                                return <h4>{player.nickname}</h4>
+                            <div>{this.state.players.map((player, key) => {
+                                return <h4 key={key}>{player.nickname}</h4>
                             })}
                             </div>
                         </div>
-                        <button id="btn-stop-game">End Game</button>
+                        <button id="btn-stop-game" onClick={this.endGame}>{ this.state.ended? "Exit" : "End Game"}</button>
                     </div>
                 </div>
             </div>
