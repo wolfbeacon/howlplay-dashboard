@@ -92,14 +92,16 @@ class DisplayScore extends React.Component {
         if (api) { api.socket.close() }
     }
 
-    endGame() {
-      if (!this.state.ended) {
-        window.clearInterval(timer);
-        api.socket.sendCode(13);
-        this.setState({ended: true});
-      } else {
-        window.history.back();
-      }
+    endGame(e) {
+        e.preventDefault();
+        if (!this.state.ended) {
+            window.clearInterval(timer);
+            api.socket.sendCode(13);
+            api.socket.close();
+            this.setState({ended: true});
+        } else {
+            this.props.history.goBack();
+        }
     }
 
     render() {
