@@ -35,9 +35,11 @@ class DisplayScore extends React.Component {
                 return res.json();
             }).then(function (quiz) {
                 api = new ScoreBoardSocketApi(self.props.url);
+                // api = new ScoreBoardSocketApi("ws://localhost:9090");
                 answers = quiz.questions.map(x => parseInt(x.answer, 10));
 
                 api.socket.onopen = () => {
+                  api.socket.sendCode(12);
                   api.socket.sendCode(15);
                   setInterval(() => { api.socket.sendCode(14) }, 1000);
                 }
@@ -65,7 +67,6 @@ class DisplayScore extends React.Component {
                         // this.setState({players: ["Test", "Test1"]});
                         break;
                       case 15:
-                        console.log("HAMMER TIME");
                         startTime = new Date(util.arrayBufferToString(e.data.slice(1)));
 
                         // Assume people would have this run for longer than a month...
