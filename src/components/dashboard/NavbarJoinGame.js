@@ -3,7 +3,7 @@ import {bindActionCreators} from "redux";
 import { DEFAULT_API_URL } from '../../configurations';
 import {connect} from "react-redux";
 import {setUrl} from "../../redux/actions/ScoreboardActions";
-import {store} from '../../index'
+import {withRouter} from 'react-router-dom';
 
 const quizInfoUrl = DEFAULT_API_URL + '/quizzes/codes/';
 let codeField = "";
@@ -13,17 +13,16 @@ class NavbarJoinGame extends React.Component {
     codeField = e.target.value;
   }
 
-  joinGame = () => {
+  joinGame = (e) => {
+    e.preventDefault();
     fetch(quizInfoUrl + codeField)
       .then(data => {
         return data.json();
       }).then(json => {
         if (json.url) {
           console.log(json);
-          console.log("Joining game");
           this.props.setUrl(json);
-          console.log(store.getState());
-          window.location = '/#/displayscore';
+          this.props.history.push('/displayscore');
         }
       }).catch(err => {
         console.log("Error when joining game");
@@ -50,4 +49,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 }, dispatch);
 
 
-export default connect(mapStateToProps, mapDispatchToProps) (NavbarJoinGame);
+export default connect(mapStateToProps, mapDispatchToProps) (withRouter(NavbarJoinGame));

@@ -1,5 +1,4 @@
 import cloneDeep from "lodash/cloneDeep";
-import {push} from 'react-router-redux';
 
 const navbar_default_state = {
     expanded: false,
@@ -27,8 +26,7 @@ export const DashboardReducer = (state=login_default_state, action) => {
     let newState = { ...state };
     switch (action.type){
         case "SET_QUIZ_TOKEN":
-            newState = { ...state, quizToken: action.payload };
-            push('/dashboard');
+            newState = { ...state, error: null, quizToken: action.payload };
             break;
         case "BAD_QUIZ_TOKEN":
             newState = { ...state, error: "Your access key is invalid." };

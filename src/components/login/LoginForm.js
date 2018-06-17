@@ -13,6 +13,7 @@ class LoginForm extends Component {
         this.state = {
             token: ""
         }
+        console.log(this.props);
     }
 
     onTokenInput = (e) => {
@@ -23,10 +24,8 @@ class LoginForm extends Component {
     };
 
     onLogin = (e) => {
-      console.log(this.state);
-      console.log(e);
-      e.preventDefault();
-        this.props.setQuizToken(this.state.token);
+        e.preventDefault();
+        this.props.setQuizToken(this.state.token, this.props.history);
     };
 
     render() {
