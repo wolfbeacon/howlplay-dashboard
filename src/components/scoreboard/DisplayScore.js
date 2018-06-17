@@ -2,11 +2,12 @@ import React from 'react';
 import TopTenBoard from './TopTen.js'
 import ScoreBoardSocketApi from '../../lib/socket.js'
 import util from '../../lib/util';
-import {store} from '../../index'
-import {DEFAULT_QUIZ_TOKEN, DEFAULT_WEBSOCKET_URL, DEFAULT_API_URL} from "../../configurations";
+import { connect } from "react-redux";
+import { withRouter } from 'react-router-dom';
+import { DEFAULT_API_URL } from "../../configurations";
 
 // const answers = [0, 2, 1, 2, 1];
-let getQuizUrlPrefix = DEFAULT_API_URL + '/quizzes/';
+let getQuizUrlPrefix = DEFAULT_API_URL + '/quiz/';
 let api = null;
 let users = [];
 let answers = [];
@@ -29,18 +30,11 @@ class DisplayScore extends React.Component {
         let self = this;
         this.endGame = this.endGame.bind(self);
 
-
-        fetch(getQuizUrlPrefix + DEFAULT_QUIZ_TOKEN)
+        fetch(getQuizUrlPrefix + this.props.id)
             .then(function (res) {
-                console.log(res);
                 return res.json();
-            }).then(function (data) {
-                let quiz = data[0];
-                console.log(store.getState());
-                api = new ScoreBoardSocketApi(DEFAULT_WEBSOCKET_URL);
-                // api = new ScoreBoardSocketApi(store.getState().scoreboard.url);
-
-                quiz.questions = JSON.parse(quiz.questions);
+            }).then(function (quiz) {
+                api = new ScoreBoardSocketApi(self.props.url);
                 answers = quiz.questions.map(x => parseInt(x.answer, 10));
 
                 api.socket.onopen = () => {
@@ -134,4 +128,9 @@ class DisplayScore extends React.Component {
     }
 }
 
-export default DisplayScore;
+const mapStateToProps = state => ({
+    id: state.scoreboard.id,
+    url: state.scoreboard.url
+});
+
+export default connect(mapStateToProps, null)(withRouter(DisplayScore));
