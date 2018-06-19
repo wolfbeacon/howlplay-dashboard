@@ -40,8 +40,8 @@ class DisplayScore extends React.Component {
             .then(function (res) {
                 return res.json();
             }).then(function (quiz) {
-                // api = new ScoreBoardSocketApi(self.props.url);
-                api = new ScoreBoardSocketApi("ws://localhost:9090");
+                api = new ScoreBoardSocketApi(self.props.url);
+                // api = new ScoreBoardSocketApi("ws://localhost:9090");
                 answers = quiz.questions.map(x => parseInt(x.answer, 10));
                 self.setState({ curr: answers.length });
                 console.log(answers);
