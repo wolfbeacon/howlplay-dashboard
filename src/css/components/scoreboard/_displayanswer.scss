@@ -1,0 +1,26 @@
+.display-answer {
+    padding: 0 10px;
+    &-items {
+        list-style-type: none;
+        padding-left: 20px;
+    }
+
+    &-item {
+        display: flex;
+        flex-direction: column;
+        margin: 14px 0;
+
+        &-head {
+            margin-bottom: 4px;
+            font-size: 15px;
+        }
+
+        &-bar {
+            height: 25px;
+            background-color: $primary;
+            transition: width 0.4s ease-in-out 0s;
+            padding: 0 2px;
+            width: 0;
+        }
+    }
+}

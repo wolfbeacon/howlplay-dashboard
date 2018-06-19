@@ -37,6 +37,5 @@ export const DashboardReducer = (state=login_default_state, action) => {
         default:
             break;
     }
-    console.log(newState);
     return newState;
 };

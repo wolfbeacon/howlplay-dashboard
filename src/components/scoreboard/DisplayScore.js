@@ -1,9 +1,12 @@
 import React from 'react';
-import TopTenBoard from './TopTen.js'
-import ScoreBoardSocketApi from '../../lib/socket.js'
+import TopTenBoard from './TopTen';
+import DisplayAnswer from './DisplayAnswer';
+import ScoreBoardSocketApi from '../../lib/socket';
 import util from '../../lib/util';
 import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { faAngleLeft, faAngleRight } from '@fortawesome/fontawesome-free-solid';
 import { DEFAULT_API_URL } from "../../configurations";
 
 // const answers = [0, 2, 1, 2, 1];
@@ -25,10 +28,13 @@ class DisplayScore extends React.Component {
         this.state = {
             players: [],
             ended: false,
+            curr: -1,
             runtime: null
         };
         let self = this;
         this.endGame = this.endGame.bind(self);
+        this.nextDisplay = this.nextDisplay.bind(self);
+        this.prevDisplay = this.prevDisplay.bind(self);
 
         fetch(getQuizUrlPrefix + this.props.id)
             .then(function (res) {
@@ -37,6 +43,8 @@ class DisplayScore extends React.Component {
                 api = new ScoreBoardSocketApi(self.props.url);
                 // api = new ScoreBoardSocketApi("ws://localhost:9090");
                 answers = quiz.questions.map(x => parseInt(x.answer, 10));
+                self.setState({ curr: answers.length });
+                console.log(answers);
 
                 api.socket.onopen = () => {
                   api.socket.sendCode(12);
@@ -52,7 +60,7 @@ class DisplayScore extends React.Component {
                         break;
                       case 14:
                         let data = new Uint8Array(e.data);
-                        users = JSON.parse(util.arrayBufferToString(data.slice(1))).slice(0, 10);
+                        users = JSON.parse(util.arrayBufferToString(data.slice(1)));
                         users.map((user) => {
                             user.score = 0;
                             return user.answers.map((answer, index) => {
@@ -64,7 +72,6 @@ class DisplayScore extends React.Component {
                             return b.score - a.score;
                         });
                         self.setState({players: users});
-                        // this.setState({players: ["Test", "Test1"]});
                         break;
                       case 15:
                         startTime = new Date(util.arrayBufferToString(e.data.slice(1)));
@@ -105,12 +112,33 @@ class DisplayScore extends React.Component {
         }
     }
 
+    nextDisplay() {
+        let curr = this.state.curr;
+        this.setState({curr: (curr++ === answers.length? 0: curr)});
+    }
+
+    prevDisplay() {
+        let curr = this.state.curr;
+        this.setState({curr: (curr-- === 0? answers.length: curr)});
+    }
+
     render() {
         return (
             <div id="scoreboard">
                 <div className="display-score-screen">
                     <div className="display-card">
-                        <TopTenBoard users={users}/>
+                        <div className="display-card-header">
+                            <h1 className="toptenboard-title">Top 10 Users</h1>
+                            <div className="display-score-controls">
+                                <FontAwesomeIcon onClick={this.prevDisplay} icon={ faAngleLeft } size="2x"/>
+                                <FontAwesomeIcon onClick={this.nextDisplay} icon={ faAngleRight } size="2x"/>
+                            </div>
+                        </div>
+                        {
+                            this.state.curr === answers.length || this.state.curr < 0?
+                            <TopTenBoard users={users.slice(0, 10)} />:
+                            <DisplayAnswer users={this.state.players} index={this.state.curr} answer={answers[this.state.curr]}/>
+                        }
                     </div>
                     <div className="display-card">
                         <h2 className="time-left">Time Left: <span id="timer-time">

@@ -57,6 +57,29 @@
   }
 }
 
+.display-card-header {
+  display: flex;
+  align-items: center;
+  padding-bottom: 12px;
+}
+
+.toptenboard-title {
+  font-size: 1.6rem;
+  margin-right: auto;
+}
+
+.display-score-controls {
+  display: block;
+  & * {
+    padding: 8px;
+    border-radius: 10px;
+    transition: all 0.1s ease-in-out 0s;
+    &:hover {
+      color: $primary-dark;
+    }
+  }
+}
+
 #btn-stop-game {
   border: none;
   color: white;
@@ -72,5 +95,6 @@
   background-color: $primary-dark;
 }
 
+@import "../components/scoreboard/displayanswer";
 @import "../components/scoreboard/topten";
 @import "../components/scoreboard/row";
