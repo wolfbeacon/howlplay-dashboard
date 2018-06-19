@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { DEFAULT_API_URL } from '../../configurations';
 
 let results = [0, 0, 0, 0];
 
@@ -7,19 +9,28 @@ class DisplayAnswer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            users: this.props.users,
-            index: this.props.index
+            users: [],
+            quiz: [],
+            index: -1
         };
+
+        let self = this;
+        fetch(DEFAULT_API_URL + '/quiz/' + this.props.id).then((res) => {
+            return res.json();
+        }).then((data) => {
+            self.setState({quiz: data.questions});
+        });
     }
 
     componentWillReceiveProps() {
-        if (Object.is(this.state.users, this.props.users) || this.state.index !== this.props.index) {
+        if (JSON.stringify(this.state.users) !== JSON.stringify(this.props.users) || this.state.index !== this.props.index) {
             console.log("Update Answer Display");
+
             let self = this;
             results = [0, 0, 0, 0];
-
             this.setState({ index: this.props.index });
-            this.state.users.map((user) => {
+            this.setState({ users: this.props.users });
+            this.props.users.map((user) => {
                 let i = self.props.index;
                 if (user.answers.length > i) {
                     let answer = user.answers[i];
@@ -31,21 +42,36 @@ class DisplayAnswer extends React.Component {
     }
 
     render() {
+        let quiz = this.state.quiz;
+        console.log(quiz);
         return <div className="display-answer">
-            <h2>Question {this.state.index + 1}</h2>
-            <ul className="display-answer-items">
             {
-                results.map((item, index) => {
-                    let percent = item / this.state.users.length || 0;
-                    return <li key={index} className="display-answer-item">
-                        <p className="display-answer-item-head">Answer {parseInt(index, 10) + 1} - {percent * 100 + "%"}</p>
-                        <div className="display-answer-item-bar" style={{width: percent * 100 + "%"}}></div>
-                    </li>;
-                })
+                quiz.length !== 0 && this.state.index !== -1?
+                <div>
+                <h3>{ quiz[this.state.index].title }</h3>
+                <ul className="display-answer-items">
+                {
+                    results.map((item, index) => {
+                        if (quiz[this.state.index].choices.length > index) {
+                            let percent = item / this.state.users.length || 0;
+                            return <li key={index} className="display-answer-item">
+                                <p className="display-answer-item-head">Answer {parseInt(index, 10) + 1} - {percent * 100 + "%"}</p>
+                                <div className="display-answer-item-bar" style={{ width: percent * 100 + "%" }}></div>
+                            </li>;
+                        }
+                        return null;
+                    })
+                }
+                </ul>
+                </div>:
+                <p>Loading...</p>
             }
-            </ul>
         </div>;
     }
 }
 
-export default DisplayAnswer;
+const mapStateToProps = state => ({
+    id: state.scoreboard.id
+});
+
+export default connect(mapStateToProps, null)(DisplayAnswer);

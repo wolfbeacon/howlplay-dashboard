@@ -40,8 +40,8 @@ class DisplayScore extends React.Component {
             .then(function (res) {
                 return res.json();
             }).then(function (quiz) {
-                api = new ScoreBoardSocketApi(self.props.url);
-                // api = new ScoreBoardSocketApi("ws://localhost:9090");
+                // api = new ScoreBoardSocketApi(self.props.url);
+                api = new ScoreBoardSocketApi("ws://localhost:9090");
                 answers = quiz.questions.map(x => parseInt(x.answer, 10));
                 self.setState({ curr: answers.length });
                 console.log(answers);
@@ -137,7 +137,7 @@ class DisplayScore extends React.Component {
                         {
                             this.state.curr === answers.length || this.state.curr < 0?
                             <TopTenBoard users={users.slice(0, 10)} />:
-                            <DisplayAnswer users={users} index={this.state.curr} answer={answers[this.state.curr]}/>
+                            <DisplayAnswer users={this.state.players} index={this.state.curr} answer={answers[this.state.curr]}/>
                         }
                     </div>
                     <div className="display-card">
