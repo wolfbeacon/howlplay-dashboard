@@ -1,8 +1,9 @@
 import * as axios from "axios";
+import {DEFAULT_API_URL} from "../../configurations.example";
 
 const quizEndpoint = axios.create(
     {
-        baseURL: "http://localhost:8080",
+        baseURL: DEFAULT_API_URL,
         timeout: 1000,
         headers: {
             // contentType: "application/json"
