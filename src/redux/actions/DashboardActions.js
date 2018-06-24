@@ -1,7 +1,7 @@
 import { DEFAULT_API_URL } from '../../configurations';
 import axios from 'axios/index';
 
-const MAIN_URL = DEFAULT_API_URL + "/quizzes/";
+const DASHBOARD_SIGNIN_URL = DEFAULT_API_URL + "/dashboard/signin/";
 
 export function toggleNavbar() {
     return {
@@ -11,8 +11,17 @@ export function toggleNavbar() {
 
 export function setQuizToken(token, history) {
     return dispatch => {
-      axios.get(MAIN_URL + token).then((data) => {
-        if (data.data.length === 0) {
+      fetch(
+        DASHBOARD_SIGNIN_URL,
+        {
+          method : 'POST',
+          body : JSON.stringify({token : token})
+        }
+      ).then(resp => {
+        return resp.json();
+      }).then(data => {
+        console.log(data)
+        if (!data) {
           dispatch({
             type: 'BAD_QUIZ_TOKEN'
           });
@@ -23,10 +32,10 @@ export function setQuizToken(token, history) {
           });
           history.push('/dashboard');
         }
-      }, (err) => {
+      }).catch(err => {
         dispatch({
           type: 'MISSING_QUIZ_TOKEN'
         });
-      });
+      })
     }
 }
