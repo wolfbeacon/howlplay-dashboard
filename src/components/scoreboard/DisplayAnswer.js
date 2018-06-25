@@ -58,7 +58,7 @@ class DisplayAnswer extends React.Component {
                             return <li key={index} className="display-answer-item">
                                 <p className="display-answer-item-head">
                                 {
-                                    (quiz[this.state.index].choices[index].startsWith("**Image**")?
+                                    (quiz[this.state.index].choices[index].startsWith("**IMG**")?
                                     "Answer" + (parseInt(index, 10) + 1) : 
                                     quiz[this.state.index].choices[index])
                                         + " - " + (percent * 100 + "%")
