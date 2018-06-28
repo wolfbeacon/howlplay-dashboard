@@ -78,7 +78,9 @@ const DashboardModal = ({edit, setFormApi, expanded, toggleModal, createQuiz, up
                             <h2 className="modal-content-headers">Quiz Questions</h2>
                             <div className="dashboard-modal-inputs">
                             {
-                                formApi.values.questions && formApi.values.questions.map((x,i) => <NestedField field={["questions", i]} key={i}>
+                                !formApi.values.questions || formApi.values.questions.length === 0?
+                                <h3 style={{margin: "8px 8px 0", color: "rgba(0,0,0,0.2)"}}>There appears to be no questions...</h3>:
+                                formApi.values.questions.map((x,i) => <NestedField field={["questions", i]} key={i}>
                                     <ModalQuestionItem formApi={formApi} index={i}/>
                                 </NestedField>)
                             }
