@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {toggleModal} from "../../redux/actions/ModalActions";
 import {deleteQuiz} from "../../redux/actions/QuizActions";
 
-const url = 'http://localhost:8080/spinup';
+const url = 'https://howlplay-dashboard.azurewebsites.net/spinup';
 const DEFAULT_ADMIN_KEY = "HelloWorld";
 
 function startQuiz(quiz_details, admin_key) {
