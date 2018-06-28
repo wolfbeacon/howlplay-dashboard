@@ -1,5 +1,4 @@
 import { DEFAULT_API_URL } from '../../configurations';
-import axios from 'axios/index';
 
 const DASHBOARD_SIGNIN_URL = DEFAULT_API_URL + "/dashboard/signin/";
 
@@ -15,7 +14,12 @@ export function setQuizToken(token, history) {
         DASHBOARD_SIGNIN_URL,
         {
           method : 'POST',
-          body : JSON.stringify({token : token})
+          body : JSON.stringify({token : token}),
+          headers : {
+            'Content-Type' : 'application/json',
+          },
+          credentials: 'include',
+          mode : 'cors'
         }
       ).then(resp => {
         return resp.json();

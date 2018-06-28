@@ -3,7 +3,6 @@ import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import DashboardContentHeader from "./DashboardContentHeader";
 import {DEFAULT_API_URL} from "../../configurations"
-import util from "../../lib/util"
 
 class DashboardContent extends React.Component {
   constructor() {
@@ -15,11 +14,16 @@ class DashboardContent extends React.Component {
 
   componentWillMount() {
     console.log('Geting quizzes')
-    fetch(DEFAULT_API_URL + '/organizers/' + '1' +'/quizzes/')
+    fetch(
+      DEFAULT_API_URL + '/dashboard/quizzes',
+      {
+        credentials : 'include',
+        mode : 'cors'
+      }
+    )
     .then(resp => {
       return resp.json();
     }).then(data => {
-      console.log(data);
       this.setState({
         quizzes : data
       })
@@ -29,27 +33,14 @@ class DashboardContent extends React.Component {
   render() {
     console.log(this.state.quizzes)
     let quizzes = this.state.quizzes.map((quiz) => {
-      return <li>{quiz.id}</li>
+      return <DashboardContentHeader />
     })
     console.log(quizzes)
     return <div id={"dashboard-content"}>
-        <DashboardContentHeader/>
-        <ul>{quizzes}</ul>
+        {quizzes}
     </div>;
   }
 }
-
-// const DashboardContent = () => {
-//     // fetch(DEFAULT_API_URL + '/organizers/' + util.getCurrentUserId() +'/quizzes/')
-//     // .then(json => {
-//     //   return json;
-//     // }).then(data => {
-//     //   console.log(data);
-//     // });
-//     return <div id={"dashboard-content"}>
-//         <DashboardContentHeader/>
-//     </div>;
-//   }
 
 const mapStateToProps = (state) => {
     let activeQuiz = state.quiz.activeQuiz;
