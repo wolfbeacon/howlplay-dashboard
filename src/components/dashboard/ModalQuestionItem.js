@@ -39,27 +39,31 @@ const Answers = [
 ];
 
 const ModalQuestionItem = ({index, formApi}) =>
-    <div className={"modal-question-item"}>
-        <h3>Question {index}</h3>
-        <Text className={`modal-question-question ${showErrorQuizName(index, formApi)}`} placeholder="Question Name"
+    <div className="modal__question">
+        <div className="modal__question__header">
+            <h3 className="modal__question__title">Question {index + 1}</h3>
+            <button type="button" className="modal__question__delete" onClick={() => formApi.removeValue("questions", index)}>Delete</button>
+        </div>
+        <Text className={`modal__question__question ${showErrorQuizName(index, formApi)}`} placeholder="What is the question?"
               field={"title"} asyncValidate={validateNotEmptyAsync}/>
 
-        <h4 className={"modal-question-subtitle"}>Options</h4>
-        <div className="modal-question-options">
-            <Text field={["choices", 0]} className={showErrorAnswers(0, index, formApi)} placeholder="Choice 1"
-                  asyncValidate={validateNotEmptyAsync}/>
-            <Text field={["choices", 1]} className={showErrorAnswers(1, index, formApi)} placeholder="Choice 2"
-                  asyncValidate={validateNotEmptyAsync}/>
-        </div>
-        <div className="modal-question-options">
-            <Text field={["choices", 2]} className={showErrorAnswers(2, index, formApi)} placeholder="Choice 3"
-                  asyncValidate={validateNotEmptyAsync}/>
-            <Text field={["choices", 3]} className={showErrorAnswers(3, index, formApi)} placeholder="Choice 4"
-                  asyncValidate={validateNotEmptyAsync}/>
+        <h4 className={"modal__question__title--sub"}>Options</h4>
+        <div className="modal__question__options">
+            {
+                Array(4).fill().map((value, key) => (
+                    <Text
+                        field={["choices", key]}
+                        className={showErrorAnswers(0, index, formApi)}
+                        placeholder={"Choice " + (key + 1)}
+                        asyncValidate={validateNotEmptyAsync}
+                        key={key}
+                    />
+                ))
+            }
         </div>
 
-        <h4 className={"modal-question-subtitle"}>Answer</h4>
-        <Select options={Answers} field={"answer"} className={"modal-question-answer"}/>
+        <h4 className={"modal__question__title--sub"}>Answer</h4>
+        <Select options={Answers} field={"answer"} className={"modal__question__answer"}/>
     </div>;
 
 export default ModalQuestionItem;

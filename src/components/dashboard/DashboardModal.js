@@ -59,10 +59,10 @@ const submitForm = (edit, submittedValues, toggleModal, createQuiz, updateQuiz) 
 const DashboardModal = ({edit, setFormApi, expanded, toggleModal, createQuiz, updateQuiz}) =>
     <Form getApi={setFormApi} onSubmit={submittedValues => submitForm(edit, submittedValues, toggleModal, createQuiz, updateQuiz)}>
         {formApi => (
-                <form id={"dashboard-modal"} onSubmit={formApi.submitForm} style={{display: `${(expanded) ? "flex" : "none"}`}}>
-                    <div id={"dashboard-modal-box"} className={"modal-default"}>
-                        <div className={"dashboard-modal-header"}>
-                            <h3 className={"dashboard-modal-title"}>{(edit)? "Edit": "New"} Quiz</h3>
+                <form id="dashboard-modal" onSubmit={formApi.submitForm} style={{display: `${(expanded) ? "flex" : "none"}`}}>
+                    <div id="dashboard-modal-box" className="modal-default">
+                        <div className="dashboard-modal-header">
+                            <h3 className="dashboard-modal-title">{(edit)? "Edit": "New"} Quiz</h3>
                             <FontAwesomeIcon onClick={() => toggleModal()} id={"dashboard-modal-close"} icon={faTimes} size="lg"/>
                         </div>
                         <div className={"dashboard-modal-content"}>
@@ -75,11 +75,18 @@ const DashboardModal = ({edit, setFormApi, expanded, toggleModal, createQuiz, up
                                 {/*</select>*/}
                             </div>
 
-                            <h2 className={"modal-content-headers"}>Quiz Questions</h2>
-                            <div className={"dashboard-modal-inputs"}>
-                                {Array(3).fill().map((x,i)=> <NestedField field={["questions", i]} key={i}><ModalQuestionItem formApi={formApi} index={i + 1}/></NestedField>)}
+                            <h2 className="modal-content-headers">Quiz Questions</h2>
+                            <div className="dashboard-modal-inputs">
+                            {
+                                !formApi.values.questions || formApi.values.questions.length === 0?
+                                <h3 style={{margin: "8px 8px 0", color: "rgba(0,0,0,0.2)"}}>There appears to be no questions...</h3>:
+                                formApi.values.questions.map((x,i) => <NestedField field={["questions", i]} key={i}>
+                                    <ModalQuestionItem formApi={formApi} index={i}/>
+                                </NestedField>)
+                            }
                             </div>
-                            <button type="submit" id={"modal-content-submit"}>Submit</button>
+                            <button type="button" className="modal-content-add" onClick={() => formApi.addValue("questions", {})}>Add Question</button>
+                            <button type="submit" id="modal-content-submit">Submit</button>
                         </div>
                     </div>
                     <div id={"dashboard-modal-backdrop"} className={"modal-default"}/>
