@@ -2,53 +2,44 @@ import React from "react";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import DashboardContentHeader from "./DashboardContentHeader";
-import {DEFAULT_API_URL} from "../../configurations"
 
 class DashboardContent extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      quizzes : []
-    }
-  }
-
-  componentWillMount() {
-    console.log('Geting quizzes')
-    fetch(
-      DEFAULT_API_URL + '/dashboard/quizzes',
-      {
-        credentials : 'include',
-        mode : 'cors'
-      }
-    )
-    .then(resp => {
-      return resp.json();
-    }).then(data => {
-      this.setState({
-        quizzes : data
-      })
-    });
-  }
-
   render() {
-    console.log(this.state.quizzes)
-    let quizzes = this.state.quizzes.map((quiz) => {
-      return <DashboardContentHeader />
-    })
-    console.log(quizzes)
+    console.log(this.props.activeQuiz);
+    const { activeQuiz } = this.props;
     return <div id={"dashboard-content"}>
-        {quizzes}
+      <DashboardContentHeader />
+      {
+        activeQuiz ? <div className="dashboard-content__quiz">
+          <h2 className="dashboard-content__title">Questions</h2>
+          { activeQuiz.questions.map((question, key) => {
+            const { answer, title, choices } = question;
+            return <div className="dashboard-content__item--question" key={key}>
+              <h3 className="dashboard-content__title--question">Question {key + 1}: { title }</h3>
+              <div className="dashboard-content__choices">
+              {
+                choices.map((choice, key) => {
+                  const isIMG = choice.startsWith("**Image** ");
+                  return <div className={
+                    "dashboard-content__item--choice" + (isIMG ? "--image" : "") + (key.toString() === answer ? " dashboard-content__item--answer" : "")
+                  } style={ isIMG? {backgroundImage: "url(" + choice.slice(10) + ")"} : null }>
+                    { isIMG ? null: choice }
+                  </div>
+                })
+              }
+              </div>
+            </div>
+          })
+        }
+        </div> : null
+      }
     </div>;
   }
 }
 
-const mapStateToProps = (state) => {
-    let activeQuiz = state.quiz.activeQuiz;
-    return ({
-        quizName: (activeQuiz) ? activeQuiz.name : "",
-        groupName: "UserName",
-    })
-};
+const mapStateToProps = (state) => ({
+  activeQuiz: state.quiz.activeQuiz
+});
 
 const mapDispatchToProps = dispatch => bindActionCreators({
 

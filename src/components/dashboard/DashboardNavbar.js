@@ -7,8 +7,7 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faPlus from '@fortawesome/fontawesome-free-solid/faPlus';
 import NavbarJoinGame from "./NavbarJoinGame";
 
-const DashboardNavbar = ({groups, expanded, toggleModal}) =>
-<div id={`dashboard-navbar`} className={(expanded) ? "dashboard-nav-expanded" : "dashboard-nav-collapsed"} >
+const DashboardNavbar = ({groups, quizzes, expanded, toggleModal}) => <div id={`dashboard-navbar`} className={(expanded) ? "dashboard-nav-expanded" : "dashboard-nav-collapsed"} >
     <div id={"dashboard-navbar-items"}>
         <GroupNavbarItem id={"user"} />
     </div>
@@ -24,6 +23,7 @@ const DashboardNavbar = ({groups, expanded, toggleModal}) =>
 const mapStateToProps = (state) => ({
     expanded: state.dashboardNavbar.expanded,
     groups: state.dashboardNavbar.groups,
+    quizzes: state.quiz.quizzes
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({

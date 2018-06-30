@@ -22,8 +22,8 @@ function startQuiz(quiz_details, admin_key) {
 const DashboardContentHeader = ({quiz, quizName, groupName, toggleModal, deleteQuiz}) =>
     <div id={"dashboard-content-header"} style={{display: `${(groupName) ? 'flex': 'none'}`}}>
         <div className={"dashboard-content-labels"}>
-            <h1 className={"edit-label"}>{quizName}</h1>
-            <h3 className={"group-editable edit-label"}>{groupName}</h3>
+            <h1 className={"quiz-name-edit-label"}>{quizName}</h1>
+            <h3 className={"group-name-edit-label"}>{groupName}</h3>
         </div>
         <div id="dashboard-content-controls">
             <button className={"quiz-button"} id={"start-quiz-button"} onClick={(e) => startQuiz(quizName, DEFAULT_ADMIN_KEY)}>Start</button>
