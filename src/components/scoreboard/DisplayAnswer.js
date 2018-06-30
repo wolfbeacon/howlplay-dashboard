@@ -52,10 +52,18 @@ class DisplayAnswer extends React.Component {
                 <ul className="display-answer-items">
                 {
                     results.map((item, index) => {
+                        console.log(item);
                         if (quiz[this.state.index].choices.length > index) {
                             let percent = item / this.state.users.length || 0;
                             return <li key={index} className="display-answer-item">
-                                <p className="display-answer-item-head">Answer {parseInt(index, 10) + 1} - {percent * 100 + "%"}</p>
+                                <p className="display-answer-item-head">
+                                {
+                                    (quiz[this.state.index].choices[index].startsWith("**IMG**")?
+                                    "Answer" + (parseInt(index, 10) + 1) : 
+                                    quiz[this.state.index].choices[index])
+                                        + " - " + (percent * 100 + "%")
+                                }
+                                </p>
                                 <div className="display-answer-item-bar" style={{ width: percent * 100 + "%" }}></div>
                             </li>;
                         }
