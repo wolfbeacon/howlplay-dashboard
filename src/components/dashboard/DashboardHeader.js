@@ -8,6 +8,15 @@ import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import logo from '../../media/logo.svg';
 import StyledTitle from "../StyledTitle";
+import { DEFAULT_API_URL } from '../../configurations'
+
+function logout() {
+  fetch(DEFAULT_API_URL + '/dashboard/signout/', {
+    credentials : 'include'
+  }).then(resp => {
+    window.location = '/';
+  })
+}
 
 const DashboardHeader = ({expanded, toggleNavbar}) => <div id={"dashboard-header"}>
     <div id="dashboard-header-style">
@@ -21,7 +30,7 @@ const DashboardHeader = ({expanded, toggleNavbar}) => <div id={"dashboard-header
       <div id="dashboard-header-breadcrumb">
         <p>Home</p><FontAwesomeIcon icon={faAngleRight} size="lg"/>
       </div>
-      <div id="dashboard-header-logout">
+      <div id="dashboard-header-logout" onClick={logout}>
         <p>Logout</p><FontAwesomeIcon icon={faSignOutAlt} />
       </div>
     </div>
