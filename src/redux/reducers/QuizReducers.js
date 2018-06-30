@@ -3,7 +3,7 @@ import cloneDeep from "lodash/cloneDeep";
 const group_default_state = {
     "user" : {
         expanded: false,
-        name: "Hackathon1",
+        name: "PEPSICO",
         icon: "/icons/A.jpg",
         quizzes: ["q123"]
     }
@@ -35,7 +35,7 @@ export const QuizReducer = (state=quiz_default_state, action) => {
             if (!action.error) {
                 newState.activeQuiz = action.payload.data;
                 newState.activeQuizIndex = action.meta.index;
-                console.log(newState.activeQuizIndex);
+                console.log(action);
             }
             break;
         case "QUIZ_CREATED":
@@ -57,7 +57,7 @@ export const QuizReducer = (state=quiz_default_state, action) => {
             break;
         case "GET_QUIZZES":
             if (!action.error) {
-                newState.quizzes = action.payload.data
+                newState.quizzes = action.payload;
             }
             break;
         default:

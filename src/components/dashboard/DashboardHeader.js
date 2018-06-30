@@ -1,4 +1,5 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faSignOutAlt from '@fortawesome/fontawesome-free-solid/faSignOutAlt'
 import faAngleRight from '@fortawesome/fontawesome-free-solid/faAngleRight'
@@ -45,4 +46,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
     toggleNavbar: toggleNavbar
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps) (DashboardHeader);
+export default connect(mapStateToProps, mapDispatchToProps) (withRouter(DashboardHeader));

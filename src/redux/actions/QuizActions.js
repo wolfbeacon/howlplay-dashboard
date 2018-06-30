@@ -1,5 +1,5 @@
 import * as axios from "axios";
-import {DEFAULT_API_URL} from "../../configurations.example";
+import {DEFAULT_API_URL} from "../../configurations";
 
 const quizEndpoint = axios.create(
     {
@@ -37,10 +37,20 @@ export function createQuiz(quizData) {
 }
 
 export function getQuizzes(userID) {
-    const promise = quizEndpoint.get(`/quizzes/${userID}`);
-    return {
-        type: "GET_QUIZZES",
-        payload: promise
+    return dispatch => { 
+        fetch(
+            DEFAULT_API_URL + '/dashboard/quizzes',
+            {
+                credentials: 'include',
+                mode: 'cors'
+            }
+        ).then(resp => resp.json()
+        ).then(data => {
+            dispatch({
+                type: "GET_QUIZZES",
+                payload: data
+            })
+        });
     }
 }
 

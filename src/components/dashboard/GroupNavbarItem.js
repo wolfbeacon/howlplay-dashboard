@@ -8,17 +8,23 @@ import CollapsedIcon from "@fortawesome/fontawesome-free-solid/faAngleDown"
 import {groupHeaderClicked} from "../../redux/actions/QuizActions";
 
 
-const GroupNavbarItem = ({name, icon, quizzes, expanded, headerClick, id}) =>
-    <div className={"group-navbar-item"}>
+const GroupNavbarItem = ({name, icon, quizzes, expanded, headerClick}) => {
+    return <div className={"group-navbar-item"}>
         <div className={"group-navbar-header"} onClick={headerClick}>
             <div className={"group-navbar-icon hackathon-icon"} style={{backgroundImage: `url(${process.env.PUBLIC_URL + icon})`}}/>
-            <h3 className={"group-navbar-title"}>Test User</h3>
+            <h3 className={"group-navbar-title"}>{ name }</h3>
             <FontAwesomeIcon className={"group-navbar-icon group-dropdown-icon"} icon={expanded ? ExpandedIcon : CollapsedIcon} size="lg" />
         </div>
         <div className={"quizzes-group " + ((expanded) ? "quizzes-group quizzes-group-expanded" : "quizzes-group quizzes-group-collapsed")}>
-            {quizzes.map((quiz, i) => <QuizNavbarItem name={quiz.name} index={i} id={quiz.id} key={i}/>)}
+            {
+                quizzes ? quizzes.map((quiz, key) => {
+                    return <QuizNavbarItem name={quiz.name} index={key} id={quiz.id} key={key}/>
+                }) :
+                null
+            }
         </div>
-    </div>;
+    </div>
+};
 
 
 const mapStateToProps = (state, ownProps) => ({
