@@ -9,6 +9,13 @@ export function toggleNavbar() {
     }
 }
 
+export function missingToken(history) {
+  return dispatch => {
+    history.push('/');
+    dispatch({type: 'MISSING_QUIZ_TOKEN'});
+  }
+}
+
 export function setQuizToken(token, history) {
     return dispatch => {
       axios.get(MAIN_URL + token).then((data) => {

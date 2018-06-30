@@ -5,9 +5,11 @@ import ScoreBoardSocketApi from '../../lib/socket';
 import util from '../../lib/util';
 import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom';
+import { bindActionCreators } from "redux";
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight } from '@fortawesome/fontawesome-free-solid';
 import { DEFAULT_API_URL } from "../../configurations";
+import { missingToken } from "../../redux/actions/DashboardActions";
 
 // const answers = [0, 2, 1, 2, 1];
 let getQuizUrlPrefix = DEFAULT_API_URL + '/quiz/';
@@ -96,6 +98,12 @@ class DisplayScore extends React.Component {
 
     }
 
+    componentWillMount() {
+        if (this.props.token === "") {
+            this.props.missingToken(this.props.history);
+        }
+    }
+
     componentWillUnmount() {
         if (api) { api.socket.close() }
     }
@@ -128,7 +136,12 @@ class DisplayScore extends React.Component {
                 <div className="display-score-screen">
                     <div className="display-card">
                         <div className="display-card-header">
-                            <h1 className="toptenboard-title">Top 10 Users</h1>
+                            <h1 className="toptenboard-title">
+                            {
+                                this.state.curr === answers.length || this.state.curr < 0 ?
+                                "Top 10 Users" : "Question " + (this.state.curr + 1)
+                            }
+                            </h1>
                             <div className="display-score-controls">
                                 <FontAwesomeIcon onClick={this.prevDisplay} icon={ faAngleLeft } size="2x"/>
                                 <FontAwesomeIcon onClick={this.nextDisplay} icon={ faAngleRight } size="2x"/>
@@ -161,7 +174,12 @@ class DisplayScore extends React.Component {
 
 const mapStateToProps = state => ({
     id: state.scoreboard.id,
-    url: state.scoreboard.url
+    url: state.scoreboard.url,
+    token: state.dashboard.quizToken
 });
 
-export default connect(mapStateToProps, null)(withRouter(DisplayScore));
+const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
+    missingToken
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(DisplayScore));
