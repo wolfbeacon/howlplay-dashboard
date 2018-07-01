@@ -5,9 +5,8 @@ import {createStore, combineReducers, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import createHistory from 'history/createBrowserHistory';
 import {Route, Switch} from 'react-router';
-import {routerMiddleware, routerReducer} from 'react-router-redux';
+import {ConnectedRouter, routerMiddleware, routerReducer} from 'react-router-redux';
 import promiseMiddleware from 'redux-promise';
-import {HashRouter} from "react-router-dom";
 import thunk from "redux-thunk";
 
 import DisplayScore from './components/scoreboard/DisplayScore';
@@ -38,16 +37,15 @@ export const store = createStore(
 );
 
 
-
 ReactDOM.render(
     <Provider store={store}>
-        <HashRouter history={history}>
+        <ConnectedRouter history={history}>
             <Switch>
                 <Route exact path="/displayscore" component={DisplayScore}/>
                 <Route exact path="/" component={Login}/>
                 <Route exact path="/dashboard" component={Dashboard}/>
                 <Route component={NotFound}/> {/*404 Route*/}
             </Switch>
-        </HashRouter>
+        </ConnectedRouter>
     </Provider> , document.getElementById('root'));
 registerServiceWorker();
