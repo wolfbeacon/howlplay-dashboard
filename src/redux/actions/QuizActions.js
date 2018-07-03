@@ -28,7 +28,8 @@ export function quizClicked(index, quizId) {
 }
 
 export function createQuiz(quizData) {
-    quizData.owner = "TestUser";
+    quizData.owner = 1;
+    console.log(quizData)
     const promise = quizEndpoint.post('/quiz', quizData);
     return {
         type: "QUIZ_CREATED",
@@ -37,7 +38,7 @@ export function createQuiz(quizData) {
 }
 
 export function getQuizzes(userID) {
-    return dispatch => { 
+    return dispatch => {
         fetch(
             DEFAULT_API_URL + '/dashboard/quizzes',
             {
