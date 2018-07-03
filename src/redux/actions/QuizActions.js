@@ -30,7 +30,7 @@ export function quizClicked(index, quizId) {
 export function createQuiz(quizData) {
     quizData.owner = 1;
     console.log(quizData)
-    const promise = quizEndpoint.post('/quiz', quizData);
+    const promise = quizEndpoint.post('/dashboard/quizzes', quizData);
     return {
         type: "QUIZ_CREATED",
         payload: promise
