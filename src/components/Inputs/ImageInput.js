@@ -1,4 +1,4 @@
-import { Form, Text, Field } from 'react-form';
+import { Field } from 'react-form';
 import React from "react";
 
 
@@ -20,9 +20,9 @@ export default class ImageInput extends React.Component {
                     // thats why we pull off onChange, onBlur, and field
                     // Note, the ...rest is important because it allows you to pass any
                     // additional fields to the internal <input>.
-                    const { onChange,  ...rest } = this.props;
+                    const { ...rest } = this.props;
 
-                    const { value,  setValue } = fieldApi;
+                    const { setValue } = fieldApi;
 
                     return (
                             <input

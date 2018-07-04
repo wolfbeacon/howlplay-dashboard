@@ -29,7 +29,6 @@ export function quizClicked(index, quizId) {
 
 export function createQuiz(quizData) {
     quizData.owner = 1;
-    console.log(quizData)
     const promise = quizEndpoint.post('/dashboard/quizzes', quizData);
     return {
         type: "QUIZ_CREATED",
@@ -38,20 +37,13 @@ export function createQuiz(quizData) {
 }
 
 export function getQuizzes(userID) {
-    return dispatch => {
-        fetch(
-            DEFAULT_API_URL + '/dashboard/quizzes',
-            {
-                credentials: 'include',
-                mode: 'cors'
-            }
-        ).then(resp => resp.json()
-        ).then(data => {
-            dispatch({
-                type: "GET_QUIZZES",
-                payload: data
-            })
-        });
+    const promise = quizEndpoint('/quizzes', {
+        withCredentials: true
+    });
+
+    return {
+        type: "GET_QUIZZES",
+        payload: promise
     }
 }
 

@@ -57,7 +57,10 @@ export const QuizReducer = (state=quiz_default_state, action) => {
             break;
         case "GET_QUIZZES":
             if (!action.error) {
+                console.log('GET QUIZZES', action.payload);
                 newState.quizzes = action.payload;
+            } else {
+                console.log(action.error);
             }
             break;
         default:
