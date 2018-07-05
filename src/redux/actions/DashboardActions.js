@@ -1,4 +1,5 @@
-import axios from 'axios';
+import * as axios from 'axios';
+axios.defaults.withCredentials = true;
 
 const DASHBOARD_SIGNIN_URL = "/dashboard/signin/";
 
@@ -23,7 +24,7 @@ export function login(token, history) {
         },
         withCredentials: true
     });
-
+    history.push('/dashboard');
     return {
         type: 'LOGIN',
         payload: promise
