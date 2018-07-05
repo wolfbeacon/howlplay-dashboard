@@ -28,7 +28,7 @@ export const DashboardReducer = (state=login_default_state, action) => {
     switch (action.type) {
         case "LOGIN":
             if (!action.error) {
-                console.log(action);
+                // Cookies.set('token', action.payload.data.token);
                 newState = { ...state, error: null, quizToken: Cookies.get('token') };
             } else {
                 newState = {...state, error: action.error}
