@@ -19,11 +19,11 @@ function startQuiz(quiz_details, admin_key) {
   })
 }
 
-const DashboardContentHeader = ({quiz, quizName, groupName, toggleModal, deleteQuiz}) =>
-    <div id={"dashboard-content-header"} style={{display: `${(groupName) ? 'flex': 'none'}`}}>
+const DashboardContentHeader = ({quiz, quizName, quizCode, groupName, toggleModal, deleteQuiz}) =>
+    <div id={"dashboard-content-header"} style={{display: `${(quizCode) ? 'flex': 'none'}`}}>
         <div className={"dashboard-content-labels"}>
-            <h1 className={"quiz-name-edit-label"}>{quizName}</h1>
-            <h3 className={"group-name-edit-label"}>{groupName}</h3>
+            <h1 className={"quiz-name"}>{quizName}</h1>
+            <h3 className={"quiz-code"}>Code: {quizCode}</h3>
         </div>
         <div id="dashboard-content-controls">
             <button className={"quiz-button"} id={"start-quiz-button"} onClick={(e) => startQuiz(quizName, DEFAULT_ADMIN_KEY)}>Start</button>
@@ -37,7 +37,7 @@ const mapStateToProps = (state) => {
     return ({
         quiz: activeQuiz,
         quizName: (activeQuiz) ? activeQuiz.name : null,
-        groupName: (activeQuiz) ? "Test User": null,
+        quizCode: (activeQuiz) ? activeQuiz.code : null
     })
 };
 

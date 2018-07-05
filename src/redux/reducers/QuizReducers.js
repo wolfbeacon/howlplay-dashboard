@@ -33,14 +33,15 @@ export const QuizReducer = (state=quiz_default_state, action) => {
     switch (action.type) {
         case "QUIZ_CLICKED":
             if (!action.error) {
-                newState.activeQuiz = action.payload.data;
-                newState.activeQuizIndex = action.meta.index;
-                console.log(action);
+                newState.activeQuiz = state.quizzes[action.payload];
+                newState.activeQuiz.questions = JSON.parse(newState.activeQuiz.questions);
+                newState.activeQuizIndex = action.payload;
             }
             break;
         case "QUIZ_CREATED":
             if (!action.error) {
                 newState.quizzes.push(action.payload.data);
+                alert(`Quiz Access Code is ${action.payload.data.code}`);
             }
             break;
         case "QUIZ_UPDATED":
@@ -49,7 +50,7 @@ export const QuizReducer = (state=quiz_default_state, action) => {
         case "QUIZ_DELETED":
             if (!action.error) {
                 if (newState.activeQuizIndex) {
-                    newState.quizzes.pop(newState.activeQuizIndex);
+                    newState.quizzes.splice(newState.activeQuizIndex, 1);
                 }
                 newState.activeQuiz = null;
                 newState.activeQuizIndex = null;
@@ -57,7 +58,10 @@ export const QuizReducer = (state=quiz_default_state, action) => {
             break;
         case "GET_QUIZZES":
             if (!action.error) {
-                newState.quizzes = action.payload;
+                console.log('GET QUIZZES', action.payload);
+                newState.quizzes = action.payload.data;
+            } else {
+                console.log(action.error);
             }
             break;
         default:

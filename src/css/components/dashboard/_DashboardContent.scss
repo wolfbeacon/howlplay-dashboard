@@ -17,14 +17,15 @@
   margin-left: auto;
 }
 
-.quiz-name-edit-label {
+.quiz-name {
   font-size: 2em;
   color: $primary-dark;
 }
 
-.group-name-edit-label {
+.quiz-code {
   font-size: 1.4em;
-  margin-top: 4px;
+  margin-top: 8px;
+  color: gray;
 }
 
 .quiz-button {

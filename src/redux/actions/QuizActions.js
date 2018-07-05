@@ -18,18 +18,16 @@ export function groupHeaderClicked(id) {
     }
 }
 
-export function quizClicked(index, quizId) {
-    const promise = quizEndpoint.get(`/quiz/${quizId}`);
+export function quizClicked(quizId) {
     return {
         type: 'QUIZ_CLICKED',
-        payload: promise,
-        meta: {index}
+        payload: quizId,
     }
 }
 
 export function createQuiz(quizData) {
     quizData.owner = 1;
-    console.log(quizData)
+    console.log(quizData);
     const promise = quizEndpoint.post('/dashboard/quizzes', quizData);
     return {
         type: "QUIZ_CREATED",
@@ -38,20 +36,13 @@ export function createQuiz(quizData) {
 }
 
 export function getQuizzes(userID) {
-    return dispatch => {
-        fetch(
-            DEFAULT_API_URL + '/dashboard/quizzes',
-            {
-                credentials: 'include',
-                mode: 'cors'
-            }
-        ).then(resp => resp.json()
-        ).then(data => {
-            dispatch({
-                type: "GET_QUIZZES",
-                payload: data
-            })
-        });
+    const promise = quizEndpoint('/quizzes', {
+        withCredentials: true
+    });
+
+    return {
+        type: "GET_QUIZZES",
+        payload: promise
     }
 }
 
@@ -68,7 +59,8 @@ export function updateQuiz(quizData) {
 
 export function deleteQuiz(quizData) {
     const promise = quizEndpoint.delete(`/quiz/${quizData.id}`, {
-        headers: {'Authorization': "bearer TestUser"}
+        headers: {'Authorization': "bearer TestUser"},
+        withCredentials: true
     });
     return {
         type: "QUIZ_DELETED",
