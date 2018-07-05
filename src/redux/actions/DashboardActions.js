@@ -1,6 +1,7 @@
-import { DEFAULT_API_URL } from '../../configurations';
+import axios from 'axios';
 
-const DASHBOARD_SIGNIN_URL = DEFAULT_API_URL + "/dashboard/signin/";
+const DASHBOARD_SIGNIN_URL = "/dashboard/signin/";
+
 
 export function toggleNavbar() {
     return {
@@ -15,38 +16,17 @@ export function missingToken(history) {
   }
 }
 
-export function setQuizToken(token, history) {
-    return dispatch => {
-      fetch(
-        DASHBOARD_SIGNIN_URL,
-        {
-          method : 'POST',
-          body : JSON.stringify({token : token}),
-          headers : {
+export function login(token, history) {
+    const promise = axios.post(DASHBOARD_SIGNIN_URL, {token : token}, {
+        headers : {
             'Content-Type' : 'application/json',
-          },
-          credentials: 'include',
-          mode : 'cors'
-        }
-      ).then(resp => {
-        return resp.json();
-      }).then(data => {
-        console.log(data)
-        if (!data) {
-          dispatch({
-            type: 'BAD_QUIZ_TOKEN'
-          });
-        } else {
-          dispatch({
-            type: 'SET_QUIZ_TOKEN',
-            payload: token
-          });
-          history.push('/dashboard');
-        }
-      }).catch(err => {
-        dispatch({
-          type: 'MISSING_QUIZ_TOKEN'
-        });
-      })
-    }
+        },
+        withCredentials: true
+    });
+
+    return {
+        type: 'LOGIN',
+        payload: promise
+    };
+
 }

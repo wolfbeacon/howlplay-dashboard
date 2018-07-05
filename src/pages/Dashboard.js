@@ -10,7 +10,7 @@ import {connect} from "react-redux";
 import { withRouter } from 'react-router-dom';
 
 class Dashboard extends React.Component {
-    componentWillMount() {
+    componentDidMount() {
         if (this.props.quizToken !== "") {
             this.props.getQuizzes(this.props.quizToken);
         } else {
@@ -32,12 +32,12 @@ class Dashboard extends React.Component {
     }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
+const mapDispatchToProps = (dispatch) => bindActionCreators({
     getQuizzes,
     missingToken
 }, dispatch);
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
     return {
         quizToken: state.dashboard.quizToken
     };

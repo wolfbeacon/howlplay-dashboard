@@ -10,12 +10,14 @@ import {connect} from "react-redux";
 import logo from '../../media/logo.svg';
 import StyledTitle from "../StyledTitle";
 import { DEFAULT_API_URL } from '../../configurations'
+import * as Cookies from 'js-cookie';
 
 function logout() {
   fetch(DEFAULT_API_URL + '/dashboard/signout/', {
     credentials : 'include'
   }).then(resp => {
     window.location = '/';
+    Cookies.remove('token')
   })
 }
 
