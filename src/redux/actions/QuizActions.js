@@ -1,15 +1,4 @@
 import * as axios from "axios";
-import {DEFAULT_API_URL} from "../../configurations";
-
-const quizEndpoint = axios.create(
-    {
-        baseURL: DEFAULT_API_URL,
-        timeout: 1000,
-        headers: {
-            // contentType: "application/json"
-        }
-    }
-);
 
 export function groupHeaderClicked(id) {
     return {
@@ -27,17 +16,15 @@ export function quizClicked(quizId) {
 
 export function createQuiz(quizData) {
     quizData.owner = 1;
-    const promise = quizEndpoint.post('/quiz', quizData);
+    const promise = axios.post('/quiz', quizData);
     return {
         type: "QUIZ_CREATED",
         payload: promise
     }
 }
 
-export function getQuizzes(userID) {
-    const promise = quizEndpoint('/quizzes', {
-        withCredentials: true
-    });
+export function getQuizzes() {
+    const promise = axios.get('/quizzes');
 
     return {
         type: "GET_QUIZZES",
@@ -47,8 +34,7 @@ export function getQuizzes(userID) {
 
 export function updateQuiz(quizData) {
     quizData.owner = "TestUser";
-    const promise = quizEndpoint.patch(`/quiz/${quizData.id}`, quizData, {
-        headers: {'Authorization': "bearer TestUser"}
+    const promise = axios.patch(`/quiz/${quizData.id}`, quizData, {
     });
     return {
         type: "QUIZ_UPDATED",
@@ -57,9 +43,7 @@ export function updateQuiz(quizData) {
 }
 
 export function deleteQuiz(quizData) {
-    const promise = quizEndpoint.delete(`/quiz/${quizData.id}`, {
-        headers: {'Authorization': "bearer TestUser"},
-        withCredentials: true
+    const promise = axios.delete(`/quiz/${quizData.id}`, {
     });
     return {
         type: "QUIZ_DELETED",

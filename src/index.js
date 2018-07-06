@@ -9,6 +9,9 @@ import {ConnectedRouter, routerMiddleware, routerReducer} from 'react-router-red
 import promiseMiddleware from 'redux-promise';
 import thunk from "redux-thunk";
 
+import axios from 'axios';
+
+
 import DisplayScore from './components/scoreboard/DisplayScore';
 import Login from "./pages/Login";
 import NotFound from "./pages/404";
@@ -20,13 +23,18 @@ import {GroupReducer, QuizReducer} from "./redux/reducers/QuizReducers";
 import {ModalReducer} from "./redux/reducers/ModalReducers";
 import {ScoreboardReducer} from "./redux/reducers/ScoreboardReducers";
 import Dashboard from "./pages/Dashboard";
+import {DEFAULT_API_URL} from "./configurations";
 
 const history = createHistory();
+
+
+axios.defaults.withCredentials = true;
+axios.defaults.baseURL = DEFAULT_API_URL;
 
 // we'll worry about redux later I just set this up so that way I can set up the redux router
 export const store = createStore(
     combineReducers({
-        routing: routerReducer,
+        router: routerReducer,
         dashboardNavbar: DashboardNavbarReducer,
         dashboard: DashboardReducer,
         quizGroups: GroupReducer,

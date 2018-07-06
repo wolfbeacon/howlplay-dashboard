@@ -7,8 +7,7 @@ const navbar_default_state = {
 
 const login_default_state = {
     error: null,
-    quizToken: ""
-}
+};
 
 export const DashboardNavbarReducer = (state=navbar_default_state, action) => {
     let newState = cloneDeep(state);
@@ -24,15 +23,14 @@ export const DashboardNavbarReducer = (state=navbar_default_state, action) => {
 
 export const DashboardReducer = (state=login_default_state, action) => {
     let newState = { ...state };
-    switch (action.type){
-        case "SET_QUIZ_TOKEN":
-            newState = { ...state, error: null, quizToken: action.payload };
-            break;
-        case "BAD_QUIZ_TOKEN":
-            newState = { ...state, error: "Your access key is invalid." };
-            break;
-        case "MISSING_QUIZ_TOKEN":
-            newState = { ...state, error: "Please provide an access key." };
+    switch (action.type) {
+        case "LOGIN":
+            console.log(action);
+            if (!action.error) {
+                newState = { ...state, error: null};
+            } else {
+                newState = {...state, error: action.error}
+            }
             break;
         default:
             break;

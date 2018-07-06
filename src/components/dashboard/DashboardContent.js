@@ -5,7 +5,6 @@ import DashboardContentHeader from "./DashboardContentHeader";
 
 class DashboardContent extends React.Component {
   render() {
-    console.log(this.props.activeQuiz);
     const { activeQuiz } = this.props;
     return <div id={"dashboard-content"}>
       <DashboardContentHeader />
@@ -20,7 +19,7 @@ class DashboardContent extends React.Component {
               {
                 choices.map((choice, key) => {
                   const isIMG = choice.startsWith("**Image** ");
-                  return <div className={
+                  return <div key={key} className={
                     "dashboard-content__item--choice" + (isIMG ? "--image" : "") + (key.toString() === answer ? " dashboard-content__item--answer" : "")
                   } style={ isIMG? {backgroundImage: "url(" + choice.slice(10) + ")"} : null }>
                     { isIMG ? null: choice }

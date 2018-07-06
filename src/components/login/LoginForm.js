@@ -3,8 +3,8 @@ import logo from '../../media/logo.svg';
 import StyledTitle from "../StyledTitle";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
-import {setQuizToken} from "../../redux/actions/DashboardActions";
 import {withRouter} from 'react-router-dom';
+import {login} from "../../redux/actions/DashboardActions";
 
 class LoginForm extends Component {
 
@@ -12,7 +12,7 @@ class LoginForm extends Component {
         super(props);
         this.state = {
             token: ""
-        }
+        };
         console.log(this.props);
     }
 
@@ -25,7 +25,7 @@ class LoginForm extends Component {
 
     onLogin = (e) => {
         e.preventDefault();
-        this.props.setQuizToken(this.state.token, this.props.history);
+        this.props.login(this.state.token);
     };
 
     render() {
@@ -55,7 +55,7 @@ class LoginForm extends Component {
 const mapStateToProps = state => ({error: state.dashboard.error});
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-    setQuizToken
+    login
 }, dispatch);
 
 

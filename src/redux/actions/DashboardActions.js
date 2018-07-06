@@ -1,6 +1,8 @@
-import { DEFAULT_API_URL } from '../../configurations';
+import * as axios from 'axios';
+import {push} from "react-router-redux";
 
-const DASHBOARD_SIGNIN_URL = DEFAULT_API_URL + "/dashboard/signin/";
+const DASHBOARD_SIGNIN_URL = "/dashboard/signin/";
+
 
 export function toggleNavbar() {
     return {
@@ -8,45 +10,25 @@ export function toggleNavbar() {
     }
 }
 
-export function missingToken(history) {
-  return dispatch => {
-    history.push('/');
-    dispatch({type: 'MISSING_QUIZ_TOKEN'});
-  }
-}
 
-export function setQuizToken(token, history) {
-    return dispatch => {
-      fetch(
-        DASHBOARD_SIGNIN_URL,
-        {
-          method : 'POST',
-          body : JSON.stringify({token : token}),
-          headers : {
-            'Content-Type' : 'application/json',
-          },
-          credentials: 'include',
-          mode : 'cors'
-        }
-      ).then(resp => {
-        return resp.json();
-      }).then(data => {
-        console.log(data)
-        if (!data) {
-          dispatch({
-            type: 'BAD_QUIZ_TOKEN'
-          });
-        } else {
-          dispatch({
-            type: 'SET_QUIZ_TOKEN',
-            payload: token
-          });
-          history.push('/dashboard');
-        }
-      }).catch(err => {
-        dispatch({
-          type: 'MISSING_QUIZ_TOKEN'
+export function login(token) {
+    return async (dispatch) => {
+        const data = await axios.post(DASHBOARD_SIGNIN_URL, {token : token}, {
+            headers : {
+                'Content-Type' : 'application/json',
+            },
         });
-      })
+
+        dispatch({
+            type: 'LOGIN',
+            payload: data
+        });
+
+        if (!data.error) {
+            dispatch(push('/dashboard'));
+        }
+
     }
+
+
 }
