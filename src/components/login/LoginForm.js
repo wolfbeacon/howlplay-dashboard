@@ -25,7 +25,7 @@ class LoginForm extends Component {
 
     onLogin = (e) => {
         e.preventDefault();
-        this.props.login(this.state.token, this.props.history);
+        this.props.login(this.state.token);
     };
 
     render() {

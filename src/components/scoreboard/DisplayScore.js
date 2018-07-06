@@ -9,7 +9,8 @@ import { bindActionCreators } from "redux";
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight } from '@fortawesome/fontawesome-free-solid';
 import { DEFAULT_API_URL } from "../../configurations";
-import { missingToken } from "../../redux/actions/DashboardActions";
+import * as Cookies from 'js-cookie';
+import {push} from "react-router-redux";
 
 // const answers = [0, 2, 1, 2, 1];
 let getQuizUrlPrefix = DEFAULT_API_URL + '/quiz/';
@@ -98,9 +99,9 @@ class DisplayScore extends React.Component {
 
     }
 
-    componentWillMount() {
-        if (this.props.token === "") {
-            this.props.missingToken(this.props.history);
+    componentDidMount() {
+        if (!Cookies.get('token')) {
+            this.props.push('/');
         }
     }
 
@@ -116,6 +117,7 @@ class DisplayScore extends React.Component {
             api.socket.close();
             this.setState({ended: true});
         } else {
+            this.props.history.goBack();
             this.props.history.goBack();
         }
     }
@@ -179,7 +181,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
-    missingToken
+    push
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(DisplayScore));

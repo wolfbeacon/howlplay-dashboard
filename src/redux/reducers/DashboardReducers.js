@@ -1,5 +1,4 @@
 import cloneDeep from "lodash/cloneDeep";
-import * as Cookies from 'js-cookie';
 
 const navbar_default_state = {
     expanded: false,
@@ -8,7 +7,6 @@ const navbar_default_state = {
 
 const login_default_state = {
     error: null,
-    quizToken: Cookies.get('token')
 };
 
 export const DashboardNavbarReducer = (state=navbar_default_state, action) => {
@@ -27,9 +25,9 @@ export const DashboardReducer = (state=login_default_state, action) => {
     let newState = { ...state };
     switch (action.type) {
         case "LOGIN":
+            console.log(action);
             if (!action.error) {
-                // Cookies.set('token', action.payload.data.token);
-                newState = { ...state, error: null, quizToken: Cookies.get('token') };
+                newState = { ...state, error: null};
             } else {
                 newState = {...state, error: action.error}
             }

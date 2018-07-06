@@ -5,16 +5,17 @@ import DashboardContent from "../components/dashboard/DashboardContent";
 import DashboardModal from "../components/dashboard/DashboardModal";
 import {bindActionCreators} from "redux";
 import {getQuizzes} from "../redux/actions/QuizActions";
-import {missingToken} from '../redux/actions/DashboardActions';
+import * as Cookies from 'js-cookie';
 import {connect} from "react-redux";
 import { withRouter } from 'react-router-dom';
+import {push} from "react-router-redux";
 
 class Dashboard extends React.Component {
     componentDidMount() {
-        if (this.props.quizToken !== "") {
+        if (Cookies.get('token')) {
             this.props.getQuizzes(this.props.quizToken);
         } else {
-            this.props.missingToken(this.props.history);
+            this.props.push('/');
         }
     }
 
@@ -34,7 +35,7 @@ class Dashboard extends React.Component {
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
     getQuizzes,
-    missingToken
+    push
 }, dispatch);
 
 function mapStateToProps(state) {

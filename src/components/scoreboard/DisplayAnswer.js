@@ -24,8 +24,6 @@ class DisplayAnswer extends React.Component {
 
     componentWillReceiveProps() {
         if (JSON.stringify(this.state.users) !== JSON.stringify(this.props.users) || this.state.index !== this.props.index) {
-            console.log("Update Answer Display");
-
             let self = this;
             results = [0, 0, 0, 0];
             this.setState({ index: this.props.index });
