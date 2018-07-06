@@ -20,9 +20,13 @@ class DashboardContent extends React.Component {
               {
                 choices.map((choice, key) => {
                   const isIMG = choice.startsWith("**Image** ");
-                  return <div className={
-                    "dashboard-content__item--choice" + (isIMG ? "--image" : "") + (key.toString() === answer ? " dashboard-content__item--answer" : "")
-                  } style={ isIMG? {backgroundImage: "url(" + choice.slice(10) + ")"} : null }>
+                  return <div 
+                    className={
+                      "dashboard-content__item--choice" + (isIMG ? "--image" : "") + (key === answer ? " dashboard-content__item--answer" : "")
+                    }
+                    style={ isIMG? {backgroundImage: "url(" + choice.slice(10) + ")"} : null }
+                    key={key}
+                  >
                     { isIMG ? null: choice }
                   </div>
                 })

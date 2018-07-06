@@ -1,6 +1,7 @@
-export function setUrl(url) {
+export function setUrl(data) {
   return {
     type : 'SET_URL',
-    payload : url
+    payload : data
   }
 }
+
