@@ -1,6 +1,6 @@
 const scoreboard_initial_state = {
   url : "",
-  id : ""
+  id : -1
 };
 
 export const ScoreboardReducer = (state=scoreboard_initial_state, action) => {
